@@ -1,0 +1,263 @@
+/* ===== JF1 PAGE-SPECIFIC STYLES ===== */
+/* Base styles are in base_jf1.css */
+
+/* ===== Description ===== */
+p {
+    color: #555;
+}
+
+/* ===== Zoom Slider ===== */
+.controls {
+    margin: 20px 0;
+}
+
+input[type="range"] {
+    width: 250px;
+    accent-color: #5a4fcf;
+    cursor: pointer;
+}
+
+/* ===== Number Line Container ===== */
+.line-container {
+    overflow-x: auto;
+    padding: 40px 10px;
+}
+
+/* ===== Number Line ===== */
+.number-line {
+    position: relative;
+    height: 120px;
+    border-top: 6px solid #5a4fcf;
+    transition: 0.4s;
+}
+
+/* ===== Whole Number Tick ===== */
+.tick {
+    position: absolute;
+    width: 4px;
+    height: 45px;
+    background: #5a4fcf;
+    top: -22px;
+    border-radius: 2px;
+}
+
+/* ===== Decimal Tick ===== */
+.decimal-tick {
+    position: absolute;
+    width: 2px;
+    height: 28px;
+    background: #aaa;
+    top: -14px;
+    border-radius: 2px;
+}
+
+/* ===== Whole Number Label ===== */
+.label {
+    position: absolute;
+    top: 35px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #5a4fcf;
+}
+
+.label:hover {
+    transform: scale(1.2);
+}
+
+/* ===== Decimal Label ===== */
+.decimal-label {
+    position: absolute;
+    top: 35px;
+    font-size: 13px;
+    color: #777;
+}
+
+/* ===== Footer Tip ===== */
+.tip {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #888;
+}
+
+/* ================= EDUCATION SECTION ================= */
+
+.examples {
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+.examples span {
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.compare-box {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* Fun Tip */
+.fun-tip {
+    background: #fff8dc;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 25px;
+    font-size: 17px;
+}
+
+/* ===== WHEEL CONTAINER ===== */
+#wheelContainer {
+    width: 250px;
+    height: 250px;
+    margin: 30px auto;
+    position: relative;
+}
+
+/* WHEEL */
+#wheel {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    position: relative;
+    background: transparent;
+    transition: transform 4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Motor image inside wheel */
+.motor-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* BUTTONS */
+button {
+    padding: 12px 20px;
+    font-size: 18px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.posBtn {
+    background: green;
+    color: white;
+}
+
+.negBtn {
+    background: red;
+    color: white;
+}
+
+.resetBtn {
+    background: #5a4fcf;
+    color: white;
+}
+
+input {
+    padding: 10px;
+    font-size: 18px;
+    width: 150px;
+    text-align: center;
+}
+
+.quizBtn {
+    background: #2196F3;
+    color: white;
+}
+
+/* ===== INFO BOX ===== */
+#info {
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* ===== QUIZ BOX ===== */
+#quizBox {
+    margin-top: 100px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.option {
+    display: block;
+    margin: 8px;
+    padding: 10px;
+    background: #eee;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background: #ddd;
+}
+
+#score {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.number-line1 {
+    width: 720px;
+    height: 6px;
+    background: #5a4fcf;
+    margin: 20px auto;
+    position: relative;
+}
+
+/* ===== EACH NUMBER POINT ===== */
+.point {
+    position: absolute;
+    bottom: -40px;
+    text-align: center;
+    width: 60px;
+}
+
+/* Tick mark */
+.point::before {
+    content: "";
+    display: block;
+    width: 3px;
+    height: 25px;
+    background: #5a4fcf;
+    margin: auto;
+}
+
+/* ===== NUMBER COLORS ===== */
+.negative {
+    color: red;
+}
+
+.positive {
+    color: green;
+}
+
+.zero {
+    color: blue;
+    font-weight: bold;
+}
+
+/* ===== RESPONSIVE: Mobile (≤768px) ===== */
+@media (max-width: 768px) {
+    #wheelContainer,
+    #wheel {
+        width: 180px;
+        height: 180px;
+    }
+}

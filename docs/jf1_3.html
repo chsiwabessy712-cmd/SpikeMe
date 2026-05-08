@@ -1,0 +1,189 @@
+{% extends 'jf1_base.html' %}
+{% load static %}
+{% block lesson_css %}
+<link rel="stylesheet" href="{% static 'base_css/jf1_style/jf1_3.css' %}">
+{% endblock %}
+{% block lesson_content %}
+    <!-- Card Container -->
+    <div class="card">
+        <h1>⚙️ Understanding motors</h1>
+        <p>A <b>motor</b> is a part of a robot or car that <b>creates movement</b>.<br>
+            👉 you can imagine motor is like a muscle for machines.</p>
+        <br>
+
+        <div class="compare-table">
+            <!-- Header Row -->
+            <div class="compare-row compare-header">
+                <div class="compare-cell">Human Body 🧍</div>
+                <div class="compare-cell">Robot / Car 🤖</div>
+            </div>
+            <!-- Brain → Controller -->
+            <div class="compare-row">
+                <div class="compare-cell">Brain 🧠</div>
+                <div class="compare-cell">Controller / Program</div>
+            </div>
+            <!-- Muscles → Motors -->
+            <div class="compare-row">
+                <div class="compare-cell">Muscles 💪</div>
+                <div class="compare-cell">Motors ⚙️</div>
+            </div>
+            <!-- Feet → Wheels -->
+            <div class="compare-row">
+                <div class="compare-cell">Feet 👣</div>
+                <div class="compare-cell">Wheels 🎡</div>
+            </div>
+            <!-- Nerves → Wires -->
+            <div class="compare-row">
+                <div class="compare-cell">Nerves</div>
+                <div class="compare-cell">Wires</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h1>🎮 Movement using motors</h1>
+        <p>A robot car usually has 2 motors,<b>left motor</b> to control left wheel and <b>right motor</b> to control
+            right wheel<br>
+            How the car moves depends on which motor is ON or OFF, and how fast it spins!</p>
+
+
+        <div class="learn-box whole-box">
+            <h2>⬆️⬇️ Move forward and backward</h2>
+            <p>
+                The car can moves straight forward <b style="color: blueviolet;">depend on the motor speed.</b><br><br>
+                When both motor have <b>same speed with positive value</b>, it make the car move <b>straight
+                    forward</b><br>
+                But, when both motor have <b>same speed with negative value</b>, it make the car move <b>straight
+                    backward</b>
+            </p>
+
+            <div class="example-container">
+                <div class="example-box-top">
+                    <h3 style="color: white;">📌 Case forward :</h3>
+                    <div class="example-box-top-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            Left Motor → <b>ON</b><br>
+                            Right Motor → <b>ON</b><br>
+                            Both motors spin forward at the <b>same positive speed</b>
+                        </p>
+                    </div>
+                    <p style="color: white;">🧠 Think of it like walking with both legs together</p>
+                </div>
+                <div class="example-box-top">
+                    <h3 style="color: white;">📌 Case backward :</h3>
+                    <div class="example-box-top-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            Left Motor → <b>ON (Backward)</b><br>
+                            Right Motor → <b>ON (Backward)</b><br>
+                            Both motors spin forward at the <b>same negative speed</b>
+                        </p>
+                    </div>
+                    <p style="color: white;">🧠 Think of it like you step back with both legs together</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="learn-box decimal-box">
+            <h2>⬅️➡️ Turn left, right, and spin around</h2>
+            <p>
+                <b style="color:rgb(226, 119, 43)">Turning</b> is a condition when car <b>make a movement (forward or
+                    backward)</b> to heading to another direction.<br>
+                But, <b style="color:rgb(226, 119, 43)">spinning</b> is a condition when car try heading to another direction,
+                but <b>the position of the car still same.</b><br><br>
+                To implement turning or spinning, the speed of both motors must be different.
+            </p>
+            <div class="example-container">
+                <div class="example-box-bottom">
+                    <h3 style="color: white;">📌 Turning case :</h3>
+                    <div class="example-box-bottom-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            one Motor → <b>OFF (or slow)</b><br>
+                            another Motor → <b>ON (fast)</b><br>
+                            🔄 The car make a <b>TURNING</b> movement
+                        </p>
+                    </div>
+                    <p style="color: white;">🧠 Why? Because one wheel pushes more than another wheel</p>
+                </div>
+                <div class="example-box-bottom">
+                    <h3 style="color: white;">📌 Spinning case</h3>
+                    <div class="example-box-bottom-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            Left Motor → <b>Forward</b><br>
+                            Right Motor → <b>Backward</b><br>
+                            🌀 The car <b>SPINS</b> in place like a dancer!
+                        </p>
+                    </div>
+                    <p style="color: white;">🧠 Because one wheel move forward & another move backward</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card1">
+        <h1>🧪 Try It Yourself!</h1>
+        <p style="color: #666; font-size: 1.05rem;">
+            Set the left and right motor speed, then press <b>RUN</b> to see how the car moves!
+        </p>
+
+        <div class="sim-layout">
+            <!-- Left: Block Code + Controls -->
+            <div class="sim-controls">
+                <!-- Scratch-style Block -->
+                <div class="motor-block">
+                    <div class="block-icon">⚙️</div>
+                    <span class="block-text">start moving at</span>
+                    <input type="number" id="leftSpeed" class="block-input" value="50" min="-100" max="100">
+                    <input type="number" id="rightSpeed" class="block-input" value="50" min="-100" max="100">
+                    <span class="block-text">% speed</span>
+                </div>
+
+                <div class="block-labels">
+                    <span></span>
+                    <span class="block-label-tag">Left Motor</span>
+                    <span class="block-label-tag">Right Motor</span>
+                    <span></span>
+                </div>
+
+                <!-- Run / Reset Buttons -->
+                <div class="sim-btn-row">
+                    <button class="sim-run-btn" id="runBtn" onclick="runSimulation()">▶ RUN</button>
+                    <button class="sim-reset-btn" onclick="resetSim()">🔄 RESET</button>
+                </div>
+
+                <!-- Movement Info -->
+                <div class="movement-info" id="movementInfo">
+                    Set motor speeds and press RUN!
+                </div>
+
+                <!-- Quick Presets -->
+                <div class="preset-section">
+                    <div class="preset-title">⚡ Quick Presets</div>
+                    <div class="preset-grid">
+                        <button class="preset-btn" onclick="setPreset(50, 50)">⬆️ Forward</button>
+                        <button class="preset-btn" onclick="setPreset(-50, -50)">⬇️ Backward</button>
+                        <button class="preset-btn" onclick="setPreset(50, 20)">↗️ Turn Right</button>
+                        <button class="preset-btn" onclick="setPreset(20, 50)">↖️ Turn Left</button>
+                        <button class="preset-btn" onclick="setPreset(50, -50)">🔄 Spin Right</button>
+                        <button class="preset-btn" onclick="setPreset(-50, 50)">🔄 Spin Left</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Car Simulator Stage -->
+            <div class="sim-stage-wrapper">
+                <div class="sim-stage" id="simStage">
+                    <!-- Dot grid is drawn via CSS -->
+                    <div class="sim-car" id="simCar">
+                        <img src="{% static 'images/car_top.svg' %}" alt="car" class="sim-car-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block lesson_js %}
+<script src="{% static 'javascript/jf1_script/jf1_3.js' %}"></script>
+{% endblock %}

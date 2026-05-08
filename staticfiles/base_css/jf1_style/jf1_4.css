@@ -1,0 +1,831 @@
+/* ===== JF1_4 PAGE-SPECIFIC STYLES =====
+   Base styles are in base_jf1.css
+*/
+
+.card2-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.card2 {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    aspect-ratio: 4 / 3;
+    background: #ddd;
+    transition: transform 0.3s ease;
+    max-height: 100%;
+}
+
+.card2:hover {
+    transform: translateY(-6px);
+}
+
+.card2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .card2-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .card2-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== ANGLE PUZZLE GAME ===== */
+
+.card1 {
+    background: rgb(255, 255, 255);
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Status Bar */
+.angle-status {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0 30px 0;
+    flex-wrap: wrap;
+}
+
+.angle-status-item {
+    background: linear-gradient(135deg, #f8f9ff, #eef1ff);
+    border-radius: 14px;
+    padding: 14px 28px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(90, 79, 207, 0.1);
+    border: 2px solid #e0d8ff;
+    min-width: 100px;
+}
+
+.angle-status-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.angle-status-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #5a4fcf;
+}
+
+/* Card Grid */
+.angle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+}
+
+/* Individual Card */
+.angle-card {
+    perspective: 800px;
+    cursor: pointer;
+    aspect-ratio: 1;
+    border-radius: 16px;
+}
+
+.angle-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    border-radius: 16px;
+}
+
+.angle-card.angle-flipped .angle-card-inner {
+    transform: rotateY(180deg);
+}
+
+.angle-card-front,
+.angle-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+/* Front Face */
+.angle-card-front {
+    background: linear-gradient(145deg, #ffffff, #f0f0f5);
+    border: 3px solid #e0e0e8;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.angle-card:hover .angle-card-front {
+    transform: scale(1.04);
+    box-shadow: 0 8px 25px rgba(90, 79, 207, 0.18);
+    border-color: #b8b0f0;
+}
+
+.angle-shape-svg {
+    width: 80%;
+    max-width: 120px;
+    margin-bottom: 8px;
+}
+
+.angle-shape-svg svg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.angle-shape-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #555;
+    text-align: center;
+}
+
+/* Back Face — Correct */
+.angle-back-correct {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    border: 3px solid #28a745;
+    transform: rotateY(180deg);
+}
+
+/* Back Face — Wrong */
+.angle-back-wrong {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    border: 3px solid #dc3545;
+    transform: rotateY(180deg);
+}
+
+/* Face emoji */
+.angle-face {
+    font-size: 3.5rem;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.angle-face-text {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.correct-text {
+    color: #1e7e34;
+}
+
+.wrong-text {
+    color: #c82333;
+}
+
+.angle-face-hint {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+/* Correct card glow */
+.angle-card.angle-correct {
+    animation: angle-correctPulse 0.6s ease;
+}
+
+@keyframes angle-correctPulse {
+    0% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.2) drop-shadow(0 0 12px rgba(40, 167, 69, 0.6));
+    }
+
+    100% {
+        filter: brightness(1);
+    }
+}
+
+/* Wrong card shake */
+.angle-card.angle-shake {
+    animation: angle-shakeAnim 0.5s ease;
+}
+
+@keyframes angle-shakeAnim {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    15% {
+        transform: translateX(-12px) rotate(-2deg);
+    }
+
+    30% {
+        transform: translateX(10px) rotate(2deg);
+    }
+
+    45% {
+        transform: translateX(-8px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translateX(6px) rotate(1deg);
+    }
+
+    75% {
+        transform: translateX(-4px);
+    }
+
+    90% {
+        transform: translateX(2px);
+    }
+}
+
+/* Celebration */
+.angle-celebration {
+    display: none;
+    text-align: center;
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 500px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    color: white;
+    animation: angle-celebPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.angle-celebration.show {
+    display: block;
+}
+
+.angle-celebration h2 {
+    color: #fff;
+    font-size: 1.6rem;
+    margin: 0 0 8px 0;
+}
+
+.angle-celebration p {
+    font-size: 1.1rem;
+    margin: 0;
+    opacity: 0.9;
+}
+
+@keyframes angle-celebPop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Restart Button */
+.angle-restart-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 14px 36px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.35);
+}
+
+.angle-restart-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.angle-restart-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Confetti */
+.angle-confetti {
+    position: absolute;
+    top: -10px;
+    border-radius: 3px;
+    opacity: 0;
+    animation: angle-confettiFall linear forwards;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes angle-confettiFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(600px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .angle-grid {
+        gap: 12px;
+    }
+
+    .angle-status {
+        gap: 12px;
+    }
+
+    .angle-status-item {
+        padding: 10px 18px;
+        min-width: 70px;
+    }
+
+    .angle-face {
+        font-size: 2.5rem;
+    }
+
+    .angle-shape-name {
+        font-size: 0.75rem;
+    }
+}
+
+/* ===== MOTOR DEGREE SIMULATOR ===== */
+
+.deg-sim-layout {
+    display: flex;
+    gap: 120px;
+    margin-top: 30px;
+    text-align: left;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.deg-controls-panel {
+    flex: 0 1 380px;
+    min-width: 450px;
+}
+
+.deg-wheel-panel {
+    flex: 0 1 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.deg-section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #5a4fcf;
+    margin: 0 0 12px 0;
+}
+
+/* Quick Degree Buttons */
+.deg-btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.deg-btn {
+    padding: 12px 8px;
+    font-size: 1rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    color: white;
+}
+
+.deg-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.deg-btn:active {
+    transform: translateY(0px);
+}
+
+.deg-pos {
+    background: linear-gradient(135deg, #4b7bec, #3867d6);
+    box-shadow: 0 3px 10px rgba(75, 123, 236, 0.35);
+}
+
+.deg-neg {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    box-shadow: 0 3px 10px rgba(231, 76, 60, 0.35);
+}
+
+/* Custom Input */
+.deg-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.deg-input {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    text-align: center;
+}
+
+.deg-input:focus {
+    border-color: #5a4fcf;
+    box-shadow: 0 0 0 3px rgba(90, 79, 207, 0.15);
+}
+
+.deg-go-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background: linear-gradient(135deg, #27ae60, #1e8449);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 3px 10px rgba(39, 174, 96, 0.35);
+}
+
+.deg-go-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(39, 174, 96, 0.45);
+}
+
+.deg-input-hint {
+    font-size: 0.85rem;
+    color: #999;
+    margin: 4px 0 20px 0;
+}
+
+/* Reset Button */
+.deg-reset-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 3px 10px rgba(127, 140, 141, 0.35);
+    margin-bottom: 20px;
+}
+
+.deg-reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(127, 140, 141, 0.45);
+}
+
+/* Status Display */
+.deg-status {
+    background: linear-gradient(135deg, #f8f9ff, #eef1ff);
+    border-radius: 14px;
+    padding: 16px 20px;
+    border: 2px solid #e0d8ff;
+}
+
+.deg-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+}
+
+.deg-status-row+.deg-status-row {
+    border-top: 1px solid #e0d8ff;
+}
+
+.deg-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #888;
+}
+
+.deg-value {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #333;
+}
+
+.deg-info {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 16px;
+    min-height: 24px;
+    text-align: center;
+}
+
+/* Motor Wheel */
+.deg-visual-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.deg-wheel-wrapper {
+    text-align: center;
+}
+
+.deg-wheel-label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #5a4fcf;
+    margin-bottom: 10px;
+}
+
+#degMotorContainer {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f0f0f5, #e8e8f0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), inset 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin: 0 auto;
+}
+
+#degMotorWheel {
+    width: 170px;
+    height: 170px;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.deg-wheel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.deg-arrow {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #888;
+}
+
+/* Rotation Progress Circle */
+.deg-viz-wrapper {
+    text-align: center;
+}
+
+.deg-viz-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #5a4fcf;
+    margin-bottom: 12px;
+}
+
+.deg-progress-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: conic-gradient(#e8e8f0 0deg, #e8e8f0 360deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), inset 0 0 0 22px white;
+    transition: background 0.4s ease, transform 0.3s ease;
+    position: relative;
+}
+
+.deg-progress-label {
+    font-size: 1.9rem;
+    font-weight: 900;
+    color: #999;
+    z-index: 1;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.deg-viz-info {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.deg-viz-legend {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.deg-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.deg-legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.deg-legend-rotated {
+    background: #4b7bec;
+}
+
+.deg-legend-remaining {
+    background: #e8e8f0;
+}
+
+/* ===== RESPONSIVE: Tablet (≤1024px) ===== */
+@media (max-width: 1024px) {
+    .deg-sim-layout {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        max-width: 100%;
+    }
+
+    .deg-controls-panel {
+        min-width: unset;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .deg-wheel-panel {
+        width: 100%;
+    }
+
+    .deg-visual-row {
+        flex-direction: row;
+        justify-content: center;
+        gap: 50px;
+    }
+}
+
+/* ===== RESPONSIVE: Small Tablet (≤768px) ===== */
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0;
+        padding: 70px 20px 30px 20px;
+    }
+
+    .card,
+    .card1 {
+        padding: 25px 20px;
+        width: 95%;
+    }
+
+    .jf-title {
+        font-size: 2rem;
+    }
+
+    .jf-label {
+        font-size: 1.2rem;
+    }
+
+    .deg-visual-row {
+        gap: 30px;
+    }
+
+    #degMotorContainer {
+        width: 170px;
+        height: 170px;
+    }
+
+    #degMotorWheel {
+        width: 140px;
+        height: 140px;
+    }
+
+    .deg-progress-circle {
+        width: 150px;
+        height: 150px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), inset 0 0 0 18px white;
+    }
+
+    .deg-progress-label {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 30px;
+    }
+
+    .angle-grid {
+        gap: 12px;
+    }
+
+    .card2-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===== RESPONSIVE: Phone (≤500px) ===== */
+@media (max-width: 500px) {
+    .deg-sim-layout {
+        gap: 25px;
+    }
+
+    .deg-controls-panel {
+        max-width: 100%;
+    }
+
+    .deg-visual-row {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    #degMotorContainer {
+        width: 150px;
+        height: 150px;
+    }
+
+    #degMotorWheel {
+        width: 120px;
+        height: 120px;
+    }
+
+    .deg-progress-circle {
+        width: 130px;
+        height: 130px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), inset 0 0 0 16px white;
+    }
+
+    .deg-progress-label {
+        font-size: 1.3rem;
+    }
+
+    .deg-btn-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .deg-btn {
+        padding: 10px 6px;
+        font-size: 0.9rem;
+    }
+
+    .deg-input-group {
+        flex-direction: column;
+    }
+
+    .deg-go-btn {
+        width: 100%;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}

@@ -1,0 +1,270 @@
+{% extends 'jf1_base.html' %}
+{% load static %}
+{% block lesson_css %}
+<link rel="stylesheet" href="{% static 'base_css/jf1_style/jf1_5.css' %}">
+{% endblock %}
+{% block lesson_content %}
+    <div class="card">
+        <h1>🧠 What Is Multiplication?</h1>
+        <p>Today we’re going to learn something POWERFUL in math and coding which is <b
+                style="color:blueviolet">MULTIPLICATION</b>.<br>
+            Multiplication means <b>Adding the same number again and again.</b> It is called repeated addition.
+        </p>
+
+        <div class="learn-box whole-box">
+            <h2>🤖 Why Is Multiplication Important in Coding?</h2>
+            <p>
+                In coding and robotics, multiplication helps us to Move objects many steps<br>
+                ,Calculate total score,Create grid maps,Repeat actions many times, Control speed
+            </p>
+
+            <div class="example-container">
+
+                <div class="example-box-top">
+                    <h3 style="color: white;">📦 Groups Idea</h3>
+                    <div class="example-box-top-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            <b>Number of groups × Number in each group</b>
+                            <br><br>
+                            5 × 2 Means: <b>5 groups of 2</b><br>
+                            2 + 2 + 2 + 2 + 2 = 10
+
+                        </p>
+                    </div>
+                </div>
+
+                <div class="example-box-top">
+                    <h3 style="color: white;">🧱 Array Model</h3>
+                    <div class="example-box-top-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            ⬜⬜⬜⬜ 4 Column at row 1<br>
+                            ⬜⬜⬜⬜ 4 Column at row 2<br>
+                            ⬜⬜⬜⬜ 4 Column at row 3<br><br>
+
+                            There are 3 rows with 4 colums for each row, <br>
+                            <b>in total : 12</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="learn-box decimal-box">
+            <h2>🔄 Multiplication and Repeated Addition</h2>
+            <p>
+                You can imagine <b style="color: rgb(226, 113, 43);">multiplication is like repeated addition. </b>it is
+                about
+                groups <br>
+                and make you counting faster. It is very important in coding
+            </p><br>
+            <div class="compare-table">
+                <!-- Header Row -->
+                <div class="compare-row compare-header">
+                    <div class="compare-cell">Multiplication</div>
+                    <div class="compare-cell">Repeated Addition</div>
+                </div>
+                <!-- Brain → Controller -->
+                <div class="compare-row">
+                    <div class="compare-cell">4 × 3</div>
+                    <div class="compare-cell">3 + 3 + 3 + 3</div>
+                </div>
+                <!-- Muscles → Motors -->
+                <div class="compare-row">
+                    <div class="compare-cell">3 × 5</div>
+                    <div class="compare-cell">5 + 5 + 5</div>
+                </div>
+                <!-- Feet → Wheels -->
+                <div class="compare-row">
+                    <div class="compare-cell">6 × 4</div>
+                    <div class="compare-cell">6 + 6 + 6 + 6</div>
+                </div>
+                <!-- Nerves → Wires -->
+                <div class="compare-row">
+                    <div class="compare-cell">2 x 4</div>
+                    <div class="compare-cell">2 + 2 + 2 + 2</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card1">
+        <h1 style="color: #5a4fcf; margin-top: 0;">✖️ Multiplication Explorer</h1>
+        <p style="color: #666; font-size: 1.1rem;">
+            Learn how multiplication works by choosing numbers, or test your skills in <b>Game Mode</b>!
+        </p>
+
+        <!-- Mode Toggle Buttons -->
+        <div class="mul-mode-toggle">
+            <button class="mul-mode-btn mul-mode-active" id="learnModeBtn" onclick="switchMode('learn')">📚 Learn
+                Mode</button>
+            <button class="mul-mode-btn" id="gameModeBtn" onclick="switchMode('game')">🎮 Game Mode</button>
+        </div>
+
+        <!-- ========== LEARN MODE ========== -->
+        <div id="learnModePanel">
+            <div class="mul-learn-grid">
+                <!-- Left Card: Input & Result -->
+                <div class="mul-blue-card">
+                    <h3>📦 Try It Yourself!</h3>
+                    <p><b>Multiplication</b> means adding the same number <u>again and again</u>. Type two numbers to
+                        see the result!</p>
+
+                    <div class="mul-code-block">
+                        <div class="mul-input-row">
+                            <div class="mul-input-group">
+                                <span class="mul-code-label">First Number</span>
+                                <input type="number" class="mul-learn-input" id="learnFirst" placeholder="?"
+                                    oninput="updateLearnResult()" min="0" max="10">
+                            </div>
+                            <span class="mul-input-times">×</span>
+                            <div class="mul-input-group">
+                                <span class="mul-code-label">Second Number</span>
+                                <input type="number" class="mul-learn-input mul-learn-input-green" id="learnSecond"
+                                    placeholder="?" oninput="updateLearnResult()" min="0" max="10">
+                            </div>
+                            <span class="mul-input-times">=</span>
+                            <div class="mul-input-group">
+                                <span class="mul-code-label">Result</span>
+                                <span class="mul-formula-result" id="resultDisplay">?</span>
+                            </div>
+                        </div>
+
+                        <div class="mul-addition-line" id="additionLine">
+                            Enter both numbers to see the breakdown
+                        </div>
+                    </div>
+
+                    <p>💡 The result updates as you type!</p>
+                </div>
+
+                <!-- Right Card: Visual Groups -->
+                <div class="mul-green-card">
+                    <h3>🟩 Visual Groups</h3>
+                    <p>Each row is one <b>group</b>. Count the dots to see the total!</p>
+
+                    <div class="mul-visual-grid" id="visualGrid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== GAME MODE ========== -->
+        <div id="gameModePanel" style="display: none;">
+            <div class="mul-game-wrapper">
+                <div class="mul-game-grid-layout">
+                    <!-- Left Card: Question & Answer -->
+                    <div class="mul-purple-card">
+                        <div class="mul-game-header">
+                            <h3>🎮 Multiplication Challenge!</h3>
+                            <span class="mul-badge mul-badge-green" id="gameScore">Score: 0</span>
+                            <span class="mul-badge mul-badge-dark" id="gameRound">Round: 1</span>
+                        </div>
+
+                        <p>Solve the multiplication problem below and type your answer!</p>
+
+                        <!-- Question Display -->
+                        <div class="mul-question-box">
+                            <div class="mul-question-label">Variable: <span class="mul-var-tag">result</span></div>
+                            <div class="mul-question-step" id="gameQuestion">
+                                Press <b>Start</b> to begin!
+                            </div>
+                        </div>
+
+                        <!-- Answer Input -->
+                        <div class="mul-answer-box">
+                            <div class="mul-answer-label"><b>What is the answer?</b></div>
+                            <div class="mul-answer-row">
+                                <input type="number" class="mul-answer-input" id="gameAnswer" placeholder="?"
+                                    onkeydown="if(event.key==='Enter') checkGameAnswer()">
+                                <button class="mul-check-btn" onclick="checkGameAnswer()">Check Answer</button>
+                            </div>
+                        </div>
+
+                        <!-- Feedback -->
+                        <div class="mul-feedback" id="gameFeedback"></div>
+                    </div>
+
+                    <!-- Right Card: Visual Hint Grid -->
+                    <div class="mul-hint-card">
+                        <h3>💡 Visual Hint</h3>
+                        <p>Count the colored dots to find the answer!</p>
+                        <div class="mul-visual-grid" id="gameVisualGrid"></div>
+                        <div class="mul-hint-placeholder" id="gameHintPlaceholder">
+                            <P>Press <b> Start </b> to see the hint grid!</P>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Start / Next Buttons -->
+                <div class="mul-game-actions">
+                    <button class="mul-start-btn" id="gameStartBtn" onclick="startGame()">🚀 Start Game</button>
+                    <button class="mul-next-btn" id="gameNextBtn" onclick="nextRound()" style="display:none;">➡️ Next
+                        Round</button>
+                    <button class="mul-reset-game-btn" onclick="resetGame()">🔄 Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card1">
+        <h1 style="color: #5a4fcf; margin-top: 0;">🚗 Car Distance Simulator (Multiplication)</h1>
+        <p style="color: #666; font-size: 1.1rem;">
+            Solve the multiplication story problem to make the car drive the correct distance!
+        </p>
+
+        <!-- Score & Round -->
+        <div class="car-sim-header">
+            <span class="mul-badge mul-badge-green" id="carScore">Score: 0</span>
+            <span class="mul-badge mul-badge-dark" id="carRound">Round: 1</span>
+        </div>
+
+        <!-- Story Problem Card -->
+        <div class="car-sim-story-card">
+            <div class="car-sim-story-icon" id="carStoryIcon">📖</div>
+            <h3 id="carStoryTitle">Math Story Problem</h3>
+            <p class="car-sim-story-text" id="carStoryText">Press <b>Start</b> to get your first problem!</p>
+            <div class="car-sim-equation" id="carEquation"></div>
+        </div>
+
+        <!-- Answer Section -->
+        <div class="car-sim-answer-section">
+            <label class="car-sim-answer-label">Your Answer (total distance):</label>
+            <div class="car-sim-answer-row">
+                <input type="number" class="car-sim-answer-input" id="carAnswerInput" placeholder="?" min="0" max="50"
+                    onkeydown="if(event.key==='Enter') carCheckAnswer()" disabled>
+                <button class="car-sim-go-btn" id="carGoBtn" onclick="carCheckAnswer()" disabled>🚀 GO!</button>
+            </div>
+        </div>
+
+        <!-- Road Track -->
+        <div class="car-sim-road-wrapper">
+            <div class="car-sim-road">
+                <div class="car-sim-lane-line"></div>
+                <!-- Distance markers generated by JS -->
+                <div class="car-sim-markers" id="carMarkers"></div>
+                <!-- Target flag -->
+                <div class="car-sim-flag" id="carFlag" style="display:none;">🚩</div>
+                <!-- The Car -->
+                <div class="car-sim-car" id="carVehicle">
+                    <img src="{% static 'images/car_top.svg' %}" alt="car">
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification popup -->
+        <div class="car-sim-notification" id="carNotification" style="display:none;"></div>
+
+        <!-- Action Buttons -->
+        <div class="car-sim-actions">
+            <button class="mul-start-btn" id="carStartBtn" onclick="carStartGame()">🚀 Start Game</button>
+            <button class="mul-next-btn" id="carNextBtn" onclick="carNextRound()" style="display:none;">➡️ Next
+                Question</button>
+            <button class="mul-reset-game-btn" onclick="carResetGame()">🔄 Reset</button>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block lesson_js %}
+<script src="{% static 'javascript/jf1_script/jf1_5.js' %}"></script>
+{% endblock %}

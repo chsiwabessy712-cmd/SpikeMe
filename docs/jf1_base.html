@@ -1,0 +1,59 @@
+{% extends 'navbar.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'base_css/base_lesson.css' %}">
+{% block lesson_css %}{% endblock %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Main Content -->
+<div class="content">
+    <!-- Hero Header -->
+    <div class="jf-header">
+        <h2 class="jf-label">Junior Foundation 1</h2>
+        <h1 class="jf-title">Hello, future developer!</h1>
+        <p class="jf-subtitle">Dive into a world where creativity and logic meet. Your journey into coding starts now
+        </p>
+    </div>
+
+    <!-- Lesson Menu Cards -->
+    <div class="lesson-grid">
+        <a href="{% url 'jf1' %}" class="lesson-card {% if active_lesson == 1 %}active{% endif %}">
+            <span class="lesson-number">1</span>
+            <span class="lesson-text">Lesson</span>
+        </a>
+        <a href="{% url 'jf1_2' %}" class="lesson-card {% if active_lesson == 2 %}active{% endif %}">
+            <span class="lesson-number">2</span>
+            <span class="lesson-text">Lesson</span>
+        </a>
+        <a href="{% url 'jf1_3' %}" class="lesson-card {% if active_lesson == 3 %}active{% endif %}">
+            <span class="lesson-number">3</span>
+            <span class="lesson-text">Lesson</span>
+        </a>
+        <a href="{% url 'jf1_4' %}" class="lesson-card {% if active_lesson == 4 %}active{% endif %}">
+            <span class="lesson-number">4</span>
+            <span class="lesson-text">Lesson</span>
+        </a>
+        <a href="{% url 'jf1_5' %}" class="lesson-card {% if active_lesson == 5 %}active{% endif %}">
+            <span class="lesson-number">5</span>
+            <span class="lesson-text">Lesson</span>
+        </a>
+        <a href="{% url 'jf1_6' %}" class="lesson-card {% if active_lesson == 6 %}active{% endif %}">
+            <span class="lesson-number">6</span>
+            <span class="lesson-text">Lesson</span>
+        </a>
+        <a href="{% url 'jf1_7' %}" class="lesson-card {% if active_lesson == 7 %}active{% endif %}">
+            <span class="lesson-number">7</span>
+            <span class="lesson-text">Lesson</span>
+        </a>
+        <a href="#" class="lesson-card {% if active_lesson == 8 %}active{% endif %}">
+            <span class="lesson-number">8</span>
+            <span class="lesson-text">Lesson</span>
+        </a>
+    </div>
+
+    {% block lesson_content %}{% endblock %}
+
+</div>
+
+{% block lesson_js %}{% endblock %}
+
+{% endblock %}

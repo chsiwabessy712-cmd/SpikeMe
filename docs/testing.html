@@ -1,0 +1,246 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'base_css/testing.css' %}">
+<!-- Main Content -->
+<div class="content">
+    <header>
+        <div style="font-size: 24px;">🤖 <b>RoboCode</b> <small style="font-size: 14px; opacity: 0.8;">Blockly
+                Tester for The Lab students</small></div>
+    </header>
+
+    <div class="main-container">
+        <div class="palette">
+            <!-- Category Buttons -->
+            <div class="cat-buttons">
+                <button class="cat-btn" data-cat="movement" style="background:#4a90e2;">⬆️ Movement</button>
+                <button class="cat-btn" data-cat="control" style="background:#ffab19;">🔄 Control</button>
+                <button class="cat-btn" data-cat="conditions" style="background:#27ae60;">🟢 Conditions</button>
+                <button class="cat-btn" data-cat="btnsensor" style="background:#8e44ad;">🔘 Button Sensor</button>
+                <button class="cat-btn" data-cat="ultrasonic" style="background:#44ad8e;">📡 Ultrasonic</button>
+                <button class="cat-btn" data-cat="colorsensor" style="background:#e67e22;">🎨 Color Sensor</button>
+                <button class="cat-btn" data-cat="lcd" style="background:#2980b9;">📺 LCD</button>
+                <button class="cat-btn" data-cat="looks" style="background:#ff6680;">🔊 Looks & Sound</button>
+            </div>
+
+            <!-- Flyout Panels -->
+            <div class="flyout" id="flyout-movement">
+                <div class="flyout-title" style="color:#4a90e2;">⬆️ Movement</div>
+                <div class="block b-move" draggable="true" data-type="move" data-val="up">Move Up ⬆️</div>
+                <div class="block b-move" draggable="true" data-type="move" data-val="down">Move Down ⬇️</div>
+                <div class="block b-move" draggable="true" data-type="move" data-val="left">Turn Left ↩️</div>
+                <div class="block b-move" draggable="true" data-type="move" data-val="right">Turn Right ↪️</div>
+            </div>
+
+            <div class="flyout" id="flyout-control">
+                <div class="flyout-title" style="color:#ffab19;">🔄 Control</div>
+                <div class="block b-logic" draggable="true" data-type="forever" data-val="∞">Repeat Forever ♾️</div>
+                <div class="block b-logic" draggable="true" data-type="repeat" data-val="5">Repeat (Custom) 🔄</div>
+                <div class="block b-logic" draggable="true" data-type="wait" data-val="1">Wait ⏳</div>
+            </div>
+
+            <div class="flyout" id="flyout-conditions">
+                <div class="flyout-title" style="color:#27ae60;">🟢 Conditions</div>
+                <div class="block b-cond" draggable="true" data-type="if_then" data-val="btn_d18">If … Then 🟢</div>
+                <div class="block b-cond" draggable="true" data-type="if_then_else" data-val="btn_d18">If … Then …
+                    Else 🟡</div>
+                <div class="block b-cond" draggable="true" data-type="if_elseif_else" data-val="btn_d18">If … Else
+                    If … Else 🟠</div>
+            </div>
+
+            <div class="flyout" id="flyout-btnsensor">
+                <div class="flyout-title" style="color:#8e44ad;">🔘 Button Sensor</div>
+                <div class="block b-sensor" draggable="true" data-type="btn_press" data-val="D18">Button D18 🔘
+                </div>
+                <div class="block b-sensor" draggable="true" data-type="btn_press" data-val="D22">Button D22 🔘
+                </div>
+                <div class="block b-sensor" draggable="true" data-type="btn_press" data-val="D24">Button D24 🔘
+                </div>
+            </div>
+
+            <div class="flyout" id="flyout-ultrasonic">
+                <div class="flyout-title" style="color:#44ad8e;">📡 Ultrasonic Sensor</div>
+                <div class="block b-sensor" draggable="true" data-type="ultrasonic" data-val="20">Ultrasonic < … cm
+                        📡</div>
+                </div>
+
+                <div class="flyout" id="flyout-colorsensor">
+                    <div class="flyout-title" style="color:#e67e22;">🎨 Color Sensor</div>
+                    <div class="block b-colorsensor" draggable="true" data-type="color_sense" data-val="white">⬜
+                        White</div>
+                    <div class="block b-colorsensor" draggable="true" data-type="color_sense" data-val="red">🟥 Red
+                    </div>
+                    <div class="block b-colorsensor" draggable="true" data-type="color_sense" data-val="orange">🟧
+                        Orange</div>
+                    <div class="block b-colorsensor" draggable="true" data-type="color_sense" data-val="green">🟩
+                        Green</div>
+                    <div class="block b-colorsensor" draggable="true" data-type="color_sense" data-val="blue">🟦
+                        Blue</div>
+                </div>
+
+                <div class="flyout" id="flyout-lcd">
+                    <div class="flyout-title" style="color:#2980b9;">📺 LCD</div>
+                    <div class="block b-lcd" draggable="true" data-type="lcd_display" data-val="Hello!">📺 LCD Print
+                    </div>
+                    <div class="block b-lcd" draggable="true" data-type="lcd_clear" data-val="clear">🗑️ LCD Clear
+                    </div>
+                </div>
+
+                <div class="flyout" id="flyout-looks">
+                    <div class="flyout-title" style="color:#ff6680;">🔊 Looks & Sound</div>
+                    <div class="block b-voice" draggable="true" data-type="say" data-val="Hello!">Say "Hello!" 💬
+                    </div>
+                    <div class="block b-voice" draggable="true" data-type="sound" data-val="beep">Play Beep 🔊</div>
+                    <div class="block b-honk" draggable="true" data-type="honk" data-val="honk">Honk 📯</div>
+                </div>
+            </div>
+
+            <div class="workspace">
+                <div class="drop-zone" id="main-drop-zone"></div>
+                <div class="workspace-footer">
+                    <div class="btn-group">
+                        <button class="run" onclick="startRobot()">▶ RUN</button>
+                        <button class="clear" onclick="stopExecution()" style="background:#e67e22;">⏹ STOP</button>
+                        <button class="clear" onclick="location.reload()">🔄 RESET</button>
+                    </div>
+                    <div id="trash-bin">🗑️ Drop here to delete</div>
+                </div>
+            </div>
+
+            <div class="stage">
+                <!-- Cone Palette -->
+                <div id="cone-palette">
+                    <div class="cone-title">🚧 Obstacles</div>
+                    <div class="cone-storage">
+                        <div class="cone" draggable="true">🚧</div>
+                        <button class="cone-clear-btn" onclick="clearAllCones()">🗑️ Clear</button>
+                    </div>
+                </div>
+
+                <div id="speech-bubble"></div>
+                <div id="robot"><img src="{% static 'images/car_top.svg' %}" alt="car"
+                        style="width: 60px; height: 60px;"></div>
+
+                <!-- Simulator Panel -->
+                <div id="sim-panel">
+                    <div class="sim-title">🎮 Simulator</div>
+                    <div class="sim-buttons">
+                        <button class="sim-btn" id="sim-d18" onclick="toggleSimBtn('D18')">🔘 D18: OFF</button>
+                        <button class="sim-btn" id="sim-d22" onclick="toggleSimBtn('D22')">🔘 D22: OFF</button>
+                        <button class="sim-btn" id="sim-d24" onclick="toggleSimBtn('D24')">🔘 D24: OFF</button>
+                    </div>
+                    <div class="sim-sensor">
+                        <label>📡 Distance: <span id="dist-label">50</span> cm</label>
+                        <input type="range" id="sim-distance" min="2" max="200" value="50"
+                            oninput="document.getElementById('dist-label').innerText = this.value">
+                    </div>
+
+                    <!-- Color Sensor + LCD Row -->
+                    <div style="display:flex; gap:10px; margin-top:10px; align-items:stretch;">
+
+                        <!-- Color Sensor -->
+                        <div style="background:#c8c8c8; border-radius:8px; padding:8px 10px; flex:0 0 auto;">
+                            <div style="font-size:11px; font-weight:bold; color:#333; margin-bottom:6px;">🎨 Color
+                                Sensor</div>
+                            <div style="display:flex; gap:6px; align-items:flex-start;">
+                                <!-- White -->
+                                <label
+                                    style="display:flex; flex-direction:column; align-items:center; cursor:pointer; gap:3px;">
+                                    <input type="radio" name="sim-color" value="white" checked
+                                        style="accent-color:#333;">
+                                    <div
+                                        style="width:28px; height:48px; border-radius:14px; background:#f0f0f0; border:2px solid #bbb;">
+                                    </div>
+                                </label>
+                                <!-- Red -->
+                                <label
+                                    style="display:flex; flex-direction:column; align-items:center; cursor:pointer; gap:3px;">
+                                    <input type="radio" name="sim-color" value="red" style="accent-color:#333;">
+                                    <div
+                                        style="width:28px; height:48px; border-radius:14px; background:#cc0000; border:2px solid #a00;">
+                                    </div>
+                                </label>
+                                <!-- Orange -->
+                                <label
+                                    style="display:flex; flex-direction:column; align-items:center; cursor:pointer; gap:3px;">
+                                    <input type="radio" name="sim-color" value="orange" style="accent-color:#333;">
+                                    <div
+                                        style="width:28px; height:48px; border-radius:14px; background:#e67e22; border:2px solid #c56d1a;">
+                                    </div>
+                                </label>
+                                <!-- Green -->
+                                <label
+                                    style="display:flex; flex-direction:column; align-items:center; cursor:pointer; gap:3px;">
+                                    <input type="radio" name="sim-color" value="green" style="accent-color:#333;">
+                                    <div
+                                        style="width:28px; height:48px; border-radius:14px; background:#00994d; border:2px solid #007a3d;">
+                                    </div>
+                                </label>
+                                <!-- Blue -->
+                                <label
+                                    style="display:flex; flex-direction:column; align-items:center; cursor:pointer; gap:3px;">
+                                    <input type="radio" name="sim-color" value="blue" style="accent-color:#333;">
+                                    <div
+                                        style="width:28px; height:48px; border-radius:14px; background:#2b5dae; border:2px solid #1e4a8a;">
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- LCD Display -->
+                        <div
+                            style="flex:1; background:#1a237e; border-radius:8px; padding:8px; border:3px solid #5c6bc0; display:flex; flex-direction:column; gap:2px;">
+                            <div style="font-size:10px; font-weight:bold; color:#7986cb; margin-bottom:2px;">📺 LCD
+                                Display</div>
+                            <!-- Row 1 -->
+                            <div id="lcd-row1" style="display:flex; gap:2px; flex:1;">
+                                <div
+                                    style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px; min-height:22px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                            </div>
+                            <!-- Row 2 -->
+                            <div id="lcd-row2" style="display:flex; gap:2px; flex:1;">
+                                <div
+                                    style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px; min-height:22px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                                <div style="flex:1; background:#0d1652; border:1px solid #283593; border-radius:2px;">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="{% static 'javascript/testing.js' %}"></script>
+
+    </div>
+    {% endblock %}

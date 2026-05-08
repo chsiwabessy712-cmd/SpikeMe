@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}RoboCode{% endblock %}</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'base_css/navbar.css' %}">
+</head>
+
+<body>
+
+        <!-- Hamburger Button (mobile only) -->
+        <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+        </button>
+
+        <!-- Overlay (mobile only) -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+                <button class="sidebar-close-btn" onclick="toggleSidebar()">✕</button>
+                <h1>✐ SpikeMe</h1>
+
+                <!-- These links can connect to other pages -->
+                <a href="{% url 'home' %}"><img src="{% static 'images/home.png' %}" width="22px" height="22px"
+                                style="margin-bottom: -4px;"> &nbsp; Home</a>
+                <a href="{% url 'jf1' %}"><img src="{% static 'images/jf1_.png' %}" width="22px" height="22px"
+                                style="margin-bottom: -4px;"> &nbsp; Foundation 1</a>
+                <a href="{% url 'jf2' %}"><img src="{% static 'images/jf2.png' %}" width="22px" height="22px"
+                                style="margin-bottom: -4px;"> &nbsp; Foundation 2</a>
+                <a href="#"><img src="{% static 'images/term1.png' %}" width="25px" height="25px"
+                                style="margin-bottom: -4px;"> &nbsp; Term 1</a>
+                <a href="#"><img src="{% static 'images/term2.png' %}" width="25px" height="25px"
+                                style="margin-bottom: -4px;"> &nbsp; Term 2</a>
+                <a href="#"><img src="{% static 'images/term3.png' %}" width="25px" height="25px"
+                                style="margin-bottom: -4px;"> &nbsp; Term 3</a>
+                <a href="#"><img src="{% static 'images/term4.png' %}" width="25px" height="25px"
+                                style="margin-bottom: -4px;"> &nbsp; Term 4</a>
+                <a href="{% url 'testing' %}"><img src="{% static 'images/term4.png' %}" width="25px" height="25px"
+                                style="margin-bottom: -4px;"> &nbsp; Robot</a>
+        </div>
+        <main>
+                {% block content %}
+                <!-- Default content or a placeholder for child templates -->
+                {% endblock %}
+        </main>
+
+        <script>
+                function toggleSidebar() {
+                        document.getElementById('sidebar').classList.toggle('sidebar-open');
+                        document.getElementById('sidebarOverlay').classList.toggle('overlay-active');
+                        document.getElementById('hamburgerBtn').classList.toggle('hamburger-hidden');
+                }
+        </script>
+</body>
+
+</html>

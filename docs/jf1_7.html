@@ -1,0 +1,186 @@
+{% extends 'jf1_base.html' %}
+{% load static %}
+{% block lesson_css %}
+<link rel="stylesheet" href="{% static 'base_css/jf1_style/jf1_7.css' %}">
+{% endblock %}
+{% block lesson_content %}
+
+    <div class="card">
+        <h1>🤖 Multiplication vs Division</h1>
+        <p>
+            “Multiplication helps robots and programs repeat actions and make totals.<br>
+            Division helps robots and programs share things equally and break problems into smaller parts.
+        </p>
+
+        <div class="learn-box whole-box">
+            <h2>
+                🌟 Learning Goals
+            </h2>
+            <p>
+                this lesson is focused to help you understand the difference between multiplication and division,<br>
+                know when to use each operation, connect math to coding and robotics, and <br>
+                solve simple real-life and programming problems.
+            </p>
+            <div class="example-container">
+                <div class="example-box-top">
+                    <h3 style="color: white;">× Multiplication example</h3>
+                    <div class="example-box-top-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            ▫️ Combines equal groups<br>
+                            ▫️ Makes bigger amounts<br>
+                            ▫️ How many altogether?
+                        </p>
+                    </div>
+                    <p style="color: white;">
+                        Multiplication = Putting Groups Together
+                    </p>
+                </div>
+
+                <div class="example-box-top">
+                    <h3 style="color: white;">÷ Multiplication example</h3>
+                    <div class="example-box-top-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            ▫️ Splits into equal groups<br>
+                            ▫️ Breaks into smaller parts<br>
+                            ▫️ How many in each group?
+                        </p>
+                    </div>
+                    <p style="color: white;">
+                        Division = Sharing Equally
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="learn-box decimal-box">
+            <h2>🧩 Coding Thinking Connection</h2>
+            <p>
+                Take a look the table below, there's a <b style="color: rgb(226, 113, 43);">connection between
+                    multiplication and division</b><br>
+                for coding concept related to real life example or robotics
+            </p><br>
+            <div class="compare-table">
+
+                <div class="compare-row compare-header">
+                    <div class="compare-cell">Coding Skill</div>
+                    <div class="compare-cell">Math Concept Used</div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell">Repeating actions</div>
+                    <div class="compare-cell">Multiplication</b></div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell">Sharing data</div>
+                    <div class="compare-cell">Division</b></div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell">Game scoring</div>
+                    <div class="compare-cell">Multiplication</b></div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell">plitting teams/groups</div>
+                    <div class="compare-cell">Division</div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell">Robot movement loops</div>
+                    <div class="compare-cell">Multiplication</div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell">Equal distribution</div>
+                    <div class="compare-cell">Division</div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card1">
+        <h1 style="color: #5a4fcf; margin-top: 0;">🎯 Monster Splash – Math Shooting Game</h1>
+        <p style="color: #666; font-size: 1.1rem;">
+            Use <b>Arrow Keys</b> to move your hero 🧑‍🚀 around the arena. Find monsters 👾 and answer
+            <b>multiplication</b> or <b>division</b> questions to shoot them with 💧 water bullets!
+        </p>
+
+        <!-- HUD -->
+        <div id="sg-hud">
+            <div class="sg-hud-item"><span>🏆 Score</span><span id="sg-score">0</span></div>
+            <div class="sg-hud-item"><span>👾 Defeated</span><span id="sg-defeated">0</span></div>
+            <div class="sg-hud-item"><span>❤️ Lives</span><span id="sg-lives">3</span></div>
+            <div class="sg-hud-item"><span>🎯 Round</span><span id="sg-round">1</span></div>
+        </div>
+
+        <!-- Game Area: Canvas + D-Pad side by side -->
+        <div id="sg-game-area">
+            <!-- Game Canvas -->
+            <div id="sg-canvas-wrap">
+                <canvas id="sg-canvas" width="760" height="480"></canvas>
+                <!-- Start overlay -->
+                <div id="sg-overlay">
+                    <div class="sg-overlay-content">
+                        <div style="font-size:3rem;">🧑‍🚀💧👾</div>
+                        <h2>Monster Splash!</h2>
+                        <p>Move with Arrow Keys or D-Pad.<br>Find and face monsters to answer math questions!</p>
+                        <button id="sg-start-btn" class="sg-btn sg-btn-play" onclick="sgStart()">▶ Start Game</button>
+                    </div>
+                </div>
+                <!-- Game Over overlay -->
+                <div id="sg-gameover" style="display:none;">
+                    <div class="sg-overlay-content">
+                        <div style="font-size:3rem;">🏆</div>
+                        <h2>Game Over!</h2>
+                        <p>Final Score: <b id="sg-final-score">0</b><br>Monsters Defeated: <b
+                                id="sg-final-defeated">0</b></p>
+                        <button class="sg-btn sg-btn-play" onclick="sgStart()">🔄 Play Again</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- D-Pad Controls (right side) -->
+            <div id="sg-controls-hint">
+                <div class="sg-dpad-label">🎮 Controls</div>
+                <button class="sg-arrow-btn" onmousedown="sgSetDir('up')" onmouseup="sgClearDir('up')"
+                    onmouseleave="sgClearDir('up')" ontouchstart="sgSetDir('up')"
+                    ontouchend="sgClearDir('up')">▲<span>Up</span></button>
+                <div class="sg-dpad-lr">
+                    <button class="sg-arrow-btn" onmousedown="sgSetDir('left')" onmouseup="sgClearDir('left')"
+                        onmouseleave="sgClearDir('left')" ontouchstart="sgSetDir('left')"
+                        ontouchend="sgClearDir('left')">◀<span>Left</span></button>
+                    <button class="sg-arrow-btn" onmousedown="sgSetDir('right')" onmouseup="sgClearDir('right')"
+                        onmouseleave="sgClearDir('right')" ontouchstart="sgSetDir('right')"
+                        ontouchend="sgClearDir('right')">►<span>Right</span></button>
+                </div>
+                <button class="sg-arrow-btn" onmousedown="sgSetDir('down')" onmouseup="sgClearDir('down')"
+                    onmouseleave="sgClearDir('down')" ontouchstart="sgSetDir('down')"
+                    ontouchend="sgClearDir('down')">▼<span>Down</span></button>
+            </div>
+        </div>
+
+        <!-- Question Modal -->
+        <div id="sg-modal" style="display:none;">
+            <div id="sg-modal-box">
+                <div id="sg-modal-icon">👾</div>
+                <h3 id="sg-modal-title">Monster Appeared!</h3>
+                <p id="sg-modal-story" class="sg-modal-story"></p>
+                <div id="sg-modal-equation"></div>
+                <div class="sg-modal-answer-row">
+                    <input type="number" id="sg-modal-input" placeholder="?" autocomplete="off">
+                    <button class="sg-btn sg-btn-fire" onclick="sgCheckAnswer()">💧 Fire!</button>
+                </div>
+                <div id="sg-modal-feedback"></div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block lesson_js %}
+    <script src="{% static 'javascript/jf1_script/jf1_7.js' %}"></script>
+{% endblock %}

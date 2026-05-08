@@ -1,0 +1,271 @@
+{% extends 'jf1_base.html' %}
+{% load static %}
+{% block lesson_css %}
+<link rel="stylesheet" href="{% static 'base_css/jf1_style/jf1_6.css' %}">
+{% endblock %}
+{% block lesson_content %}
+    <div class="card">
+        <h1>🍰 What is Division?</h1>
+        <p>Today we’re going to learn another POWERFUL concept in math and coding which is <b
+                style="color:blueviolet">DIVISON</b>.<br>
+            Division means <b>sharing something equally,</b> refers to the act of separating something into parts
+        </p>
+
+        <div class="learn-box whole-box">
+            <h2>🤖 Why Is divison Important in Coding?</h2>
+            <p>
+                Divsion is a thinking tool that shows up everywhere in programming.<br>
+                it help you to understand How can you split something into equal parts or figuring out patterns
+            </p>
+            <p>
+                👉 If you have 12 candies and 4 friends, division helps answer:<br>
+                “How many candies does each friend get?”
+            </p>
+
+            <div class="example-container">
+
+                <div class="example-box-top">
+                    <h3 style="color: white;">🧠 Sharing (Fair Share) </h3>
+                    <div class="example-box-top-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            You <b>give out items one by one</b><br>until everything
+                            is shared equally.
+                            <br><br>
+                            <b>Sharing Example:</b><br>
+                            10 cookies ÷ 2 kids = 5 cookies each
+                        </p>
+                    </div>
+                </div>
+
+                <div class="example-box-top">
+                    <h3 style="color: white;">📦 Groups Model</h3>
+                    <div class="example-box-top-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            Imageine like you  <b>make groups of equal size.</b>
+                            <br><br>
+                            <b>Group Example:</b><br>
+                            12 apples ÷ 3 apples per basket = 4 baskets
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="learn-box decimal-box">
+            <h2>🔢 Division as Repeated Subtraction</h2>
+            <p>
+                You can imagine <b style="color: rgb(226, 113, 43);">Division is like subtracting the same number again and again. </b>it is about
+                groups <br>
+                and make you can separate something into small groups
+            </p><br>
+            <div class="compare-table">
+                <!-- Header Row -->
+                <div class="compare-row compare-header">
+                    <div class="compare-cell">Division</div>
+                    <div class="compare-cell">Repeated Substraction</div>
+                </div>
+                <!-- Brain → Controller -->
+                <div class="compare-row">
+                    <div class="compare-cell">12 ÷ 3 = <b style="color: rgb(226, 113, 43);">4</b> (we substract by three, 4 times)</div>
+                    <div class="compare-cell">12 - 3 - 3 - 3 - 3 = <b style="color: rgb(226, 113, 43);">0</b></div>
+                </div>
+                <!-- Muscles → Motors -->
+                <div class="compare-row">
+                    <div class="compare-cell">10 ÷ 2 = <b style="color: rgb(226, 113, 43);">5</b> (we substract by two, 5 times)</div>
+                    <div class="compare-cell">10 - 2 - 2 - 2 - 2 - 2 = <b style="color: rgb(226, 113, 43);">0</b></div>
+                </div>
+                <!-- Feet → Wheels -->
+                <div class="compare-row">
+                    <div class="compare-cell">16 ÷ 4 = <b style="color: rgb(226, 113, 43);">4</b> (we substract by four, 4 times)</div>
+                    <div class="compare-cell">16 - 4 - 4 - 4 - 4 = <b style="color: rgb(226, 113, 43);">0</b></div>
+                </div>
+                <!-- Nerves → Wires -->
+                <div class="compare-row">
+                    <div class="compare-cell">18 ÷ 6 = <b style="color: rgb(226, 113, 43);">3</b> (we substract by six, 3 times)</div>
+                    <div class="compare-cell">18 - 6 - 6 - 6 = <b style="color: rgb(226, 113, 43);">0</b></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card1">
+        <h1 style="color: #5a4fcf; margin-top: 0;">🎯 Division Explorer</h1>
+        <p style="color: #666; font-size: 1.1rem;">
+            Learn how division works by choosing numbers, or test your skills in <b>Game Mode</b>!
+        </p>
+
+        <!-- Mode Toggle Buttons -->
+        <div class="div-mode-toggle">
+            <button class="div-mode-btn div-mode-active" id="divLearnModeBtn" onclick="divSwitchMode('learn')">📚 Learn
+                Mode</button>
+            <button class="div-mode-btn" id="divGameModeBtn" onclick="divSwitchMode('game')">🎮 Game Mode</button>
+        </div>
+
+        <!-- ========== LEARN MODE ========== -->
+        <div id="divLearnModePanel">
+            <div class="div-learn-grid">
+                <!-- Left Card: Input & Result -->
+                <div class="div-blue-card">
+                    <h3>🍰 Try It Yourself!</h3>
+                    <p><b>Division</b> means splitting a number into <u>equal groups</u>. Type two numbers to
+                        see the result!</p>
+
+                    <div class="div-code-block">
+                        <div class="div-input-row">
+                            <div class="div-input-group">
+                                <span class="div-code-label">Total (Dividend)</span>
+                                <input type="number" class="div-learn-input" id="divLearnFirst" placeholder="?"
+                                    oninput="updateDivLearnResult()" min="0" max="100">
+                            </div>
+                            <span class="div-input-sign">÷</span>
+                            <div class="div-input-group">
+                                <span class="div-code-label">Groups (Divisor)</span>
+                                <input type="number" class="div-learn-input div-learn-input-orange" id="divLearnSecond"
+                                    placeholder="?" oninput="updateDivLearnResult()" min="1" max="10">
+                            </div>
+                            <span class="div-input-sign">=</span>
+                            <div class="div-input-group">
+                                <span class="div-code-label">Each Gets</span>
+                                <span class="div-formula-result" id="divResultDisplay">?</span>
+                            </div>
+                        </div>
+
+                        <div class="div-subtraction-line" id="divSubtractionLine">
+                            Enter both numbers to see the breakdown
+                        </div>
+
+                        <div class="div-remainder-line" id="divRemainderLine"></div>
+                    </div>
+
+                    <p>💡 The result updates as you type!</p>
+                </div>
+
+                <!-- Right Card: Visual Groups -->
+                <div class="div-orange-card">
+                    <h3>🟩 Visual Groups</h3>
+                    <p>See how the total is split into <b>equal groups</b>!</p>
+
+                    <div class="div-visual-area" id="divVisualArea">
+                        <div class="div-visual-placeholder">Enter numbers to see the groups</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== GAME MODE ========== -->
+        <div id="divGameModePanel" style="display: none;">
+            <div class="div-game-wrapper">
+                <div class="div-game-grid-layout">
+                    <!-- Left Card: Question & Answer -->
+                    <div class="div-purple-card">
+                        <div class="div-game-header">
+                            <h3>🎮 Division Challenge!</h3>
+                            <span class="div-badge div-badge-green" id="divGameScore">Score: 0</span>
+                            <span class="div-badge div-badge-dark" id="divGameRound">Round: 1</span>
+                        </div>
+
+                        <p>Solve the division problem below and type your answer!</p>
+
+                        <!-- Question Display -->
+                        <div class="div-question-box">
+                            <div class="div-question-label">Variable: <span class="div-var-tag">result</span></div>
+                            <div class="div-question-step" id="divGameQuestion">
+                                Press <b>Start</b> to begin!
+                            </div>
+                        </div>
+
+                        <!-- Answer Input -->
+                        <div class="div-answer-box">
+                            <div class="div-answer-label"><b>What is the answer?</b></div>
+                            <div class="div-answer-row">
+                                <input type="number" class="div-answer-input" id="divGameAnswer" placeholder="?"
+                                    onkeydown="if(event.key==='Enter') divCheckGameAnswer()">
+                                <button class="div-check-btn" onclick="divCheckGameAnswer()">Check Answer</button>
+                            </div>
+                        </div>
+
+                        <!-- Feedback -->
+                        <div class="div-feedback" id="divGameFeedback"></div>
+                    </div>
+
+                    <!-- Right Card: Visual Hint -->
+                    <div class="div-hint-card">
+                        <h3>💡 Visual Hint</h3>
+                        <p>Count the dots in each group to find the answer!</p>
+                        <div class="div-hint-visual" id="divGameVisualArea"></div>
+                        <div class="div-hint-placeholder" id="divGameHintPlaceholder">
+                            <p>Press <b>Start</b> to see the hint!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Start / Next Buttons -->
+                <div class="div-game-actions">
+                    <button class="div-start-btn" id="divGameStartBtn" onclick="divStartGame()">🚀 Start Game</button>
+                    <button class="div-next-btn" id="divGameNextBtn" onclick="divNextRound()" style="display:none;">➡️
+                        Next Round</button>
+                    <button class="div-reset-game-btn" onclick="divResetGame()">🔄 Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card1">
+        <h1 style="color: #5a4fcf; margin-top: 0;">🚗 Car Distance Simulator (Division)</h1>
+        <p style="color: #666; font-size: 1.1rem;">
+            Solve the division story problem to make the car drive the correct distance!
+        </p>
+
+        <!-- Score & Round -->
+        <div class="car-sim-header">
+            <span class="div-badge div-badge-green" id="divCarScore">Score: 0</span>
+            <span class="div-badge div-badge-dark" id="divCarRound">Round: 1</span>
+        </div>
+
+        <!-- Story Problem Card -->
+        <div class="car-sim-story-card">
+            <div class="car-sim-story-icon" id="divCarStoryIcon">📖</div>
+            <h3 id="divCarStoryTitle">Math Story Problem</h3>
+            <p class="car-sim-story-text" id="divCarStoryText">Press <b>Start</b> to get your first problem!</p>
+            <div class="car-sim-equation" id="divCarEquation"></div>
+        </div>
+
+        <!-- Answer Section -->
+        <div class="car-sim-answer-section">
+            <label class="car-sim-answer-label">Your Answer (result of division):</label>
+            <div class="car-sim-answer-row">
+                <input type="number" class="car-sim-answer-input" id="divCarAnswerInput" placeholder="?" min="0" max="50"
+                    onkeydown="if(event.key==='Enter') divCarCheckAnswer()" disabled>
+                <button class="car-sim-go-btn" id="divCarGoBtn" onclick="divCarCheckAnswer()" disabled>🚀 GO!</button>
+            </div>
+        </div>
+
+        <!-- Road Track -->
+        <div class="car-sim-road-wrapper">
+            <div class="car-sim-road">
+                <div class="car-sim-lane-line"></div>
+                <div class="car-sim-markers" id="divCarMarkers"></div>
+                <div class="car-sim-flag" id="divCarFlag" style="display:none;">🚩</div>
+                <div class="car-sim-car" id="divCarVehicle">
+                    <img src="{% static 'images/car_top.svg' %}" alt="car">
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification popup -->
+        <div class="car-sim-notification" id="divCarNotification" style="display:none;"></div>
+
+        <!-- Action Buttons -->
+        <div class="car-sim-actions">
+            <button class="div-start-btn" id="divCarStartBtn" onclick="divCarStartGame()">🚀 Start Game</button>
+            <button class="div-next-btn" id="divCarNextBtn" onclick="divCarNextRound()" style="display:none;">➡️ Next
+                Question</button>
+            <button class="div-reset-game-btn" onclick="divCarResetGame()">🔄 Reset</button>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block lesson_js %}
+<script src="{% static 'javascript/jf1_script/jf1_6.js' %}"></script>
+{% endblock %}

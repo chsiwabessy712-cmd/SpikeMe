@@ -1,0 +1,939 @@
+/* ===== JF1_2 PAGE-SPECIFIC STYLES =====
+   Base styles are in base_jf1.css
+*/
+
+/* ===== STATUS BAR ===== */
+.puzzle-status {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0 30px 0;
+    flex-wrap: wrap;
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-value {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #5a4fcf;
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 120px;
+    height: 10px;
+    background: #e8e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #6a1b9a, #4b7bec);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+/* ===== 3x3 PUZZLE GRID ===== */
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 420px;
+    margin: 0 auto 30px auto;
+}
+
+/* ===== PUZZLE TILE (flip card) ===== */
+.puzzle-tile {
+    aspect-ratio: 1;
+    perspective: 600px;
+    cursor: pointer;
+    position: relative;
+}
+
+.tile-front,
+.tile-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease;
+}
+
+/* FRONT — shows the number */
+.tile-front {
+    background: linear-gradient(145deg, #e8e8f0, #d0d0e0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transform: rotateY(0deg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08),
+        inset 0 2px 4px rgba(255, 255, 255, 0.6);
+    border: 2px solid transparent;
+    transition: transform 0.6s ease, border-color 0.2s, box-shadow 0.2s;
+}
+
+.tile-front:hover {
+    border-color: #6a1b9a;
+    box-shadow: 0 6px 20px rgba(106, 27, 154, 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.6);
+}
+
+.tile-number {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #5a4fcf;
+    text-shadow: 0 2px 4px rgba(90, 79, 207, 0.15);
+    user-select: none;
+}
+
+/* BACK — shows image piece */
+.tile-back {
+    background-color: #f0f0f0;
+    background-repeat: no-repeat;
+    transform: rotateY(180deg);
+    z-index: 1;
+    box-shadow: 0 4px 16px rgba(106, 27, 154, 0.2);
+    border: 3px solid #6a1b9a;
+}
+
+/* ===== REVEALED STATE (flip) ===== */
+.puzzle-tile.revealed .tile-front {
+    transform: rotateY(-180deg);
+}
+
+.puzzle-tile.revealed .tile-back {
+    transform: rotateY(0deg);
+}
+
+.puzzle-tile.revealed {
+    cursor: default;
+}
+
+/* ===== CORRECT FLASH ===== */
+.puzzle-tile.correct-flash .tile-back {
+    animation: correctPulse 0.6s ease;
+}
+
+@keyframes correctPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.6);
+    }
+
+    50% {
+        box-shadow: 0 0 0 12px rgba(46, 204, 113, 0);
+    }
+
+    100% {
+        box-shadow: 0 4px 16px rgba(106, 27, 154, 0.2);
+    }
+}
+
+/* ===== WRONG SHAKE ===== */
+.puzzle-tile.wrong-shake {
+    animation: wrongShake 0.5s ease;
+}
+
+.puzzle-tile.wrong-shake .tile-front {
+    border-color: #e74c3c;
+    background: linear-gradient(145deg, #ffe0e0, #ffc8c8);
+}
+
+@keyframes wrongShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    15% {
+        transform: translateX(-8px) rotate(-2deg);
+    }
+
+    30% {
+        transform: translateX(8px) rotate(2deg);
+    }
+
+    45% {
+        transform: translateX(-6px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translateX(6px) rotate(1deg);
+    }
+
+    75% {
+        transform: translateX(-3px);
+    }
+
+    90% {
+        transform: translateX(3px);
+    }
+}
+
+/* ===== CELEBRATION ===== */
+.celebration {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+    animation: celebrationIn 0.5s ease;
+}
+
+.celebration.show {
+    display: block;
+}
+
+.celebration h2 {
+    font-size: 2rem;
+    color: #6a1b9a;
+    margin-bottom: 5px;
+}
+
+.celebration p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+@keyframes celebrationIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes imageReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===== CONFETTI ===== */
+.confetti {
+    position: absolute;
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    opacity: 0;
+    animation: confettiFall linear forwards;
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes confettiFall {
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(500px) rotate(720deg);
+    }
+}
+
+/* ===== RESTART BUTTON ===== */
+.restart-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 14px 32px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, #6a1b9a, #4a148c);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(106, 27, 154, 0.3);
+}
+
+.restart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(106, 27, 154, 0.45);
+}
+
+.restart-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .content {
+        padding: 30px 15px;
+    }
+
+    .card {
+        padding: 25px 20px;
+    }
+
+    .puzzle-grid {
+        gap: 8px;
+    }
+
+    .tile-number {
+        font-size: 1.6rem;
+    }
+
+    .puzzle-status {
+        gap: 15px;
+    }
+
+    .status-value {
+        font-size: 1.1rem;
+    }
+}
+
+.line-container {
+    overflow-x: auto;
+    padding: 40px 10px;
+}
+
+/* Ruler */
+.ruler {
+    position: relative;
+    height: 100px;
+    padding: 20px 0;
+}
+
+.ruler-line {
+    position: absolute;
+    top: 26%;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(to right, #5b8cff, #7a6cff);
+    border-radius: 6px;
+    transform: translateY(-50%);
+}
+
+.ticks {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.tick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1px;
+    cursor: pointer;
+}
+
+.tick-line {
+    width: 5px;
+    height: 34px;
+    background: #6c63ff;
+    border-radius: 4px;
+    transition: transform 0.2s;
+}
+
+.tick-label {
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #555;
+}
+
+/* Zero highlight */
+.tick.zero .tick-line {
+    height: 48px;
+    background: #ff9800;
+}
+
+.tick.zero .tick-label {
+    color: #ff9800;
+    font-size: 17px;
+}
+
+/* Negative & Positive colors */
+.tick.negative .tick-label {
+    color: #4f6ef7;
+}
+
+.tick.positive .tick-label {
+    color: #7b5cff;
+}
+
+/* Hover effect */
+.tick:hover .tick-line {
+    transform: scaleY(1.15);
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+.legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.neg {
+    background: #4f6ef7;
+}
+
+.zero-dot {
+    background: #ff9800;
+}
+
+.pos {
+    background: #7b5cff;
+}
+
+/* ===== MOTOR ROTATION SIMULATOR ===== */
+.motor-sim-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0;
+        padding: 70px 20px 30px 20px;
+    }
+
+    .motor-sim-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.motor-controls-panel {
+    text-align: left;
+}
+
+.motor-section-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #5a4fcf;
+    margin: 18px 0 10px 0;
+}
+
+.motor-section-title:first-child {
+    margin-top: 0;
+}
+
+/* Direction Buttons */
+.direction-btn-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+
+.dir-btn {
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    border: 3px solid #ddd;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: #f0f0f5;
+    color: #555;
+    flex: 1;
+    min-width: 100px;
+}
+
+.dir-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dir-forward.dir-active {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: white;
+    border-color: #27ae60;
+    box-shadow: 0 4px 16px rgba(46, 204, 113, 0.35);
+}
+
+.dir-backward.dir-active {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    border-color: #c0392b;
+    box-shadow: 0 4px 16px rgba(231, 76, 60, 0.35);
+}
+
+.dir-reset {
+    background: linear-gradient(135deg, #6a1b9a, #4a148c);
+    color: white;
+    border-color: #4a148c;
+}
+
+.dir-reset:hover {
+    box-shadow: 0 6px 16px rgba(106, 27, 154, 0.35);
+}
+
+/* Rotation Input */
+.rotation-input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.rotation-input {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    border: 3px solid #ddd;
+    border-radius: 12px;
+    text-align: center;
+    transition: border-color 0.3s;
+    width: auto;
+}
+
+.rotation-input:focus {
+    outline: none;
+    border-color: #5a4fcf;
+    box-shadow: 0 0 0 4px rgba(90, 79, 207, 0.15);
+}
+
+.go-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #4b7bec, #3867d6);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.go-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(75, 123, 236, 0.4);
+}
+
+.input-hint {
+    font-size: 0.8rem;
+    color: #999;
+    margin: 8px 0 0 0;
+}
+
+/* Status Display */
+.motor-status {
+    background: #f8f8fc;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 18px;
+    border: 2px solid #ececf4;
+}
+
+.motor-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+}
+
+.motor-status-row+.motor-status-row {
+    border-top: 1px solid #ececf4;
+}
+
+.motor-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #888;
+}
+
+.motor-value {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #5a4fcf;
+}
+
+.motor-info {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #5a4fcf;
+    margin-top: 14px;
+    min-height: 24px;
+}
+
+/* Motor Wheel */
+.motor-wheel-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
+
+.motor-visual-row {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .motor-visual-row {
+        flex-direction: column;
+        gap: 24px;
+    }
+}
+
+.motor-wheel-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#motorContainer {
+    width: 250px;
+    height: 250px;
+    position: relative;
+}
+
+#motorWheel {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    position: relative;
+    background: transparent;
+    transition: transform 3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.motor-wheel-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    user-select: none;
+    pointer-events: none;
+}
+
+.motor-arrow {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #999;
+    text-align: center;
+}
+
+/* ===== ROTATION PROGRESS CIRCLE ===== */
+.rotation-viz-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.rotation-viz-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #5a4fcf;
+}
+
+.rotation-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(#5a4fcf 0deg, #e8e8f0 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: background 0.5s ease;
+}
+
+.rotation-circle::before {
+    content: '';
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+}
+
+.rotation-circle-label {
+    position: relative;
+    z-index: 1;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #5a4fcf;
+}
+
+.rotation-viz-info {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #888;
+}
+
+.rotation-viz-info span {
+    color: #5a4fcf;
+    font-weight: 900;
+}
+
+.rotation-viz-legend {
+    display: flex;
+    gap: 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #888;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.legend-completed {
+    background: #5a4fcf;
+}
+
+.legend-remaining {
+    background: #e8e8f0;
+}
+
+/* ===== CAR DISTANCE SIMULATOR ===== */
+.car-road-section {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #ececf4;
+}
+
+/* Warning Message */
+.car-warning {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    border: 2px solid #ff9800;
+    border-radius: 12px;
+    padding: 12px 20px;
+    color: #e65100;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 auto 16px auto;
+    max-width: 400px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.car-warning.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Road Wrapper */
+.road-wrapper {
+    position: relative;
+    margin: 10px auto 20px auto;
+    max-width: 100%;
+    padding: 0 20px;
+}
+
+/* Distance Markers (numbers above road) */
+.road-markers {
+    position: relative;
+    height: 28px;
+    margin-bottom: 4px;
+}
+
+.road-marker {
+    position: absolute;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #5a4fcf;
+    background: #f0eeff;
+    border-radius: 8px;
+    padding: 2px 8px;
+}
+
+/* Road Container */
+.road-container {
+    position: relative;
+    height: 80px;
+    border-radius: 12px;
+    overflow: visible;
+}
+
+/* Road Surface */
+.road-surface {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 40px;
+    transform: translateY(-50%);
+    background: linear-gradient(180deg, #555 0%, #444 50%, #555 100%);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Dashed center line */
+.road-dashes {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    right: 10px;
+    height: 3px;
+    transform: translateY(-50%);
+    background: repeating-linear-gradient(to right,
+            #ffd54f 0px,
+            #ffd54f 20px,
+            transparent 20px,
+            transparent 36px);
+    border-radius: 2px;
+}
+
+/* Start Flag */
+.start-flag {
+    position: absolute;
+    left: -6px;
+    top: 4px;
+    font-size: 28px;
+    z-index: 5;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    animation: flagWave 2s ease-in-out infinite;
+}
+
+@keyframes flagWave {
+
+    0%,
+    100% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+/* Car (top view) */
+.road-car {
+    position: absolute;
+    left: 0%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    z-index: 10;
+    transition: left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+}
+
+.road-car-img {
+    width: 100%;
+    height: 100%;
+    transform: rotate(90deg);
+}
+
+/* Road Ticks (below road) */
+.road-ticks {
+    position: relative;
+    height: 16px;
+    margin-top: 2px;
+}
+
+.road-tick {
+    position: absolute;
+    top: 0;
+    width: 3px;
+    height: 12px;
+    background: #b0aac8;
+    border-radius: 2px;
+    transform: translateX(-50%);
+}
+
+/* Distance Display */
+.car-distance-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #f0eeff, #e8e5ff);
+    border-radius: 14px;
+    border: 2px solid #d5d0f0;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.car-dist-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #666;
+}
+
+.car-dist-value {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #5a4fcf;
+    min-width: 36px;
+    text-align: center;
+}
+
+.car-dist-unit {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #999;
+}

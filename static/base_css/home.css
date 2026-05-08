@@ -1,0 +1,438 @@
+/* ===== HOME / LANDING PAGE ===== */
+
+/* Content area — desktop with sidebar */
+.content {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    margin-left: 270px;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    padding: 60px 60px;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ===== LEFT SIDE - TEXT ===== */
+.hero-text {
+    flex: 1;
+    max-width: 520px;
+    z-index: 2;
+}
+
+/* Social Icons Row */
+.social-icons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.social-icon:hover {
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(135deg, #8823a1, #611c89);
+}
+
+/* Hero Title */
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #1a1a2e;
+    line-height: 1.15;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.5px;
+}
+
+.hero-title .highlight {
+    background: linear-gradient(135deg, #8823a1, #c850c0, #ff6680);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Hero Description */
+.hero-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.7;
+    margin: 0 0 32px 0;
+    max-width: 440px;
+}
+
+/* CTA Buttons */
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #8823a1, #611c89);
+    color: white;
+    box-shadow: 0 6px 24px rgba(136, 35, 161, 0.35);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(136, 35, 161, 0.5);
+}
+
+.btn-outline {
+    background: white;
+    color: #1a1a2e;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.btn-outline:hover {
+    border-color: #8823a1;
+    color: #8823a1;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(136, 35, 161, 0.15);
+}
+
+/* ===== RIGHT SIDE - IMAGE ===== */
+.hero-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 600px;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.12));
+    animation: heroFloat 4s ease-in-out infinite;
+}
+
+/* Glow behind the character */
+.image-glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(136, 35, 161, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 1;
+    animation: glowPulse 3s ease-in-out infinite alternate;
+}
+
+/* ===== FLOATING BADGES ===== */
+.float-badge {
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+    animation: badgeFloat 3s ease-in-out infinite;
+}
+
+.badge-1 {
+    top: 8%;
+    right: 5%;
+    animation-delay: 0s;
+}
+
+.badge-2 {
+    top: 15%;
+    left: 0%;
+    animation-delay: 0.8s;
+}
+
+.badge-3 {
+    bottom: 25%;
+    right: 0%;
+    animation-delay: 1.5s;
+}
+
+.badge-4 {
+    bottom: 15%;
+    left: 5%;
+    animation-delay: 2.2s;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes heroFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-14px);
+    }
+}
+
+@keyframes glowPulse {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+@keyframes badgeFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+}
+
+/* =======================================================
+   RESPONSIVE BREAKPOINTS
+   ======================================================= */
+
+/* ===== TABLET: ≤1024px (sidebar still visible) ===== */
+@media (max-width: 1024px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 30px;
+        gap: 30px;
+        min-height: auto;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .hero-description {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-title {
+        font-size: 2.6rem;
+    }
+
+    .hero-image {
+        max-width: 350px;
+    }
+
+    .hero-image img {
+        max-width: 340px;
+    }
+
+    .image-glow {
+        width: 300px;
+        height: 300px;
+    }
+
+    .float-badge {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        border-radius: 12px;
+    }
+}
+
+/* ===== MOBILE: ≤768px (hamburger menu replaces sidebar) ===== */
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0;
+        padding: 70px 0 30px 0;
+        min-height: auto;
+    }
+
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px 24px 40px 24px;
+        gap: 28px;
+        min-height: auto;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .social-icons {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .social-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+
+    .hero-description {
+        font-size: 0.92rem;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.65;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .btn {
+        padding: 12px 22px;
+        font-size: 0.88rem;
+    }
+
+    .hero-image {
+        max-width: 280px;
+    }
+
+    .hero-image img {
+        max-width: 260px;
+    }
+
+    .image-glow {
+        width: 240px;
+        height: 240px;
+    }
+
+    .float-badge {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        border-radius: 10px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* ===== SMALL PHONE: ≤480px ===== */
+@media (max-width: 480px) {
+    .content {
+        padding: 60px 0 20px 0;
+    }
+
+    .hero-section {
+        padding: 10px 16px 30px 16px;
+        gap: 20px;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-description {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+        font-size: 0.9rem;
+    }
+
+    .hero-image {
+        max-width: 220px;
+    }
+
+    .hero-image img {
+        max-width: 200px;
+    }
+
+    .image-glow {
+        width: 190px;
+        height: 190px;
+    }
+
+    .float-badge {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+        border-radius: 8px;
+    }
+
+    .social-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    .social-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+}

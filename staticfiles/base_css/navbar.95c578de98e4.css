@@ -1,0 +1,200 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-image: url("../images/mhk_11.7e9e37525171.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: rgb(15, 15, 15);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: #fdfdfd;
+    opacity: 0.25;
+    /* 75% overlay = background looks 25% visible */
+
+    z-index: -1;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 270px;
+    height: 100%;
+    background-image: linear-gradient(135deg, #5523a1, #441c89);
+    border-right: 3px solid #ffffff;
+    padding-top: 20px;
+    z-index: 1000;
+    overflow-y: auto;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Website Title */
+.sidebar h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 40px;
+    margin-left: -20px;
+}
+
+/* ===== MENU STYLE ===== */
+.sidebar a {
+    display: block;
+    color: #f2eeee;
+    text-decoration: none;
+    padding: 15px;
+    margin: 10px 20px;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-size: 19px;
+}
+
+/* Hover Animation */
+.sidebar a:hover {
+    background-color: #8579de;
+    color: black;
+    transform: translateX(8px);
+}
+
+/* ===== CONTENT AREA ===== */
+.content {
+    margin-left: 300px;
+    padding: 30px;
+}
+
+/* ===== CLOSE BUTTON (hidden on desktop) ===== */
+.sidebar-close-btn {
+    display: none;
+}
+
+/* ===== HAMBURGER BUTTON (hidden on desktop) ===== */
+.hamburger-btn {
+    display: none;
+}
+
+/* ===== OVERLAY (hidden on desktop) ===== */
+.sidebar-overlay {
+    display: none;
+}
+
+/* ===================================================
+   RESPONSIVE: Tablet & Phone (≤768px)
+   =================================================== */
+@media (max-width: 768px) {
+
+    /* Sidebar slides off-screen by default */
+    .sidebar {
+        transform: translateX(-100%);
+        width: 270px;
+    }
+
+    /* Sidebar visible when toggled */
+    .sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+
+    /* Close button inside sidebar */
+    .sidebar-close-btn {
+        display: block;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 36px;
+        height: 36px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s ease;
+        z-index: 10;
+    }
+
+    .sidebar-close-btn:hover {
+        background: rgba(255, 255, 255, 0.35);
+    }
+
+    /* Hamburger button — top-left */
+    .hamburger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 999;
+        width: 44px;
+        height: 44px;
+        padding: 8px;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #6a1b9a, #4a148c);
+        box-shadow: 0 3px 12px rgba(106, 27, 154, 0.4);
+        cursor: pointer;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        align-items: center;
+    }
+
+    .hamburger-btn:hover {
+        transform: scale(1.08);
+    }
+
+    .hamburger-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Hide hamburger when sidebar is open */
+    .hamburger-btn.hamburger-hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .hamburger-line {
+        display: block;
+        width: 22px;
+        height: 3px;
+        background: white;
+        border-radius: 2px;
+    }
+
+    /* Dark overlay behind sidebar */
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .sidebar-overlay.overlay-active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Remove sidebar margin from content */
+    .content {
+        margin-left: 0;
+        padding: 20px;
+        padding-top: 70px;
+    }
+}

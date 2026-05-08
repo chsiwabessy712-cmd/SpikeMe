@@ -1,0 +1,187 @@
+{% extends 'jf1_base.html' %}
+{% load static %}
+{% block lesson_css %}
+<link rel="stylesheet" href="{% static 'base_css/jf1_style/jf1.css' %}">
+{% endblock %}
+{% block lesson_content %}
+    <div class="card">
+        <!-- ================= EDUCATIONAL CONTENT ================= -->
+
+        <h1>🔢 Understanding about number ?</h1>
+
+        <div class="learn-box whole-box">
+            <h2>⭐ What is whole number ?</h2>
+
+            <p>
+                Whole numbers represent <b>complete and full objects</b>.
+                They are numbers without any decimal point.
+            </p>
+
+            <div class="examples">
+                Examples:
+                <span></span>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>5</span>
+                <span>7</span>
+            </div>
+
+            <div class="example-container">
+
+                <div class="example-box-top">
+                    <h3 style="color: white;">🍎 Counting Fruits</h3>
+                    <div class="example-box-top-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            If you have 4 apples, each apple is complete.<br>
+                            You cannot say 4 apples if one apple is half eaten.<br>
+                        </p>
+                    </div>
+
+                    <p style="color: white;">
+                        👉 4 is a whole number because it shows complete apples.
+                    </p>
+                </div>
+
+                <div class="example-box-top">
+                    <h3 style="color: white;">🎒 School Items</h3>
+                    <div class="example-box-top-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            You bring 6 books to school.<br>
+                            Books are counted as complete objects.
+                        </p>
+                    </div>
+
+                    <p style="color: white;">
+                        👉 6 is a whole number.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="learn-box decimal-box">
+            <h2>⭐ What is Decimal Number?</h2>
+
+            <p>
+                Decimal numbers show <b>parts of a whole</b>.
+                They always contain a decimal point (.).
+            </p>
+
+            <div class="examples">
+                Examples:
+                <span></span>
+                <span>1.5</span>
+                <span>2.3</span>
+                <span>4.7</span>
+                <span>6.1</span>
+            </div>
+
+
+            <div class="example-container">
+
+                <div class="example-box-bottom">
+                    <h3 style="color: white;">🍕 Sharing Pizza</h3>
+                    <div class="example-box-bottom-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            You eat half of a pizza.<br>
+                            Half pizza can be written as <b>0.5 pizza</b>.<br>
+                        </p>
+                    </div>
+
+                    <p style="color: white;">
+                        👉 0.5 is a decimal number because it shows part of pizza.
+                    </p>
+                </div>
+
+                <div class="example-box-bottom">
+                    <h3 style="color: white;">🥛 Measuring Milk</h3>
+                    <div class="example-box-bottom-inside">
+                        <p style="color: white; font-family: monospace; font-size:large;">
+                            A bottle contains <b>1.5 liters</b> of milk.<br>
+                            That means 1 full liter + half liter.
+                        </p>
+                    </div>
+
+                    <p style="color: white;">
+                        👉 1.5 is a decimal number.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <h1>🔢 Decimal Number Explorer</h1>
+        <p>Slide, zoom to discover decimal numbers!</p>
+
+        <!-- NUMBER LINE CONTROLS -->
+        <div class="controls">
+            Zoom Level <br>
+            <input type="range" id="zoomSlider" min="1" max="5" value="1">
+        </div>
+
+        <div class="line-container">
+            <div id="numberLine" class="number-line"></div>
+        </div>
+
+        <div class="tip">
+            ⭐ Zoom in to see numbers between whole numbers!
+        </div>
+
+    </div>
+
+    <div class="card">
+        <h1>Learn Positive & Negative Rotation</h1>
+        <div class="learn-box decimal-box">
+
+            <h2>⭐ Rotation using decimal number</h2>
+            <p>
+                Please test run the wheel below using <b>button</b> or <b>input decimal number</b>. and observe <br>
+                what will happen to the wheel and how many circle's it will rotate
+            </p>
+
+            <div class="example-container">
+                <div class="example-box">
+                    <button class="posBtn" onclick="rotateWheel(1)">+1</button>
+                    <button class="posBtn" onclick="rotateWheel(2)">+2</button>
+                    <button class="negBtn" onclick="rotateWheel(-1)">-1</button>
+                    <button class="negBtn" onclick="rotateWheel(-2)">-2</button>
+                    <button class="resetBtn" onclick="resetWheel()">🔄 Reset</button>
+
+                    <div id="wheelContainer">
+                        <div id="wheel">
+                            <img src="{% static 'images/Motor.png' %}" alt="Motor" class="motor-img">
+                        </div>
+                    </div>
+
+                    <h3>Type Any Number</h3>
+
+                    <input type="text" id="userInput" placeholder="Example: 1.5 or -2">
+                    <button onclick="rotateFromInput()">Rotate</button>
+
+                    <p id="info"></p>
+                </div>
+
+                <div class="example-box">
+                    <!-- ================= QUIZ SECTION ================= -->
+                    <h2>🎮 Mini Quiz</h2>
+                    <p id="question">Press Start Quiz!</p>
+
+                    <div id="options"></div>
+
+                    <button class="quizBtn" onclick="startQuiz()">Start Quiz</button>
+                    <div id="score"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block lesson_js %}
+<script src="{% static 'javascript/jf1_script/jf1_1.js' %}"></script>
+{% endblock %}

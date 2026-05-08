@@ -1,0 +1,1097 @@
+/* ===== JF1_5 PAGE-SPECIFIC STYLES =====
+   Base styles are in base_jf1.css
+*/
+
+/* ===== MULTIPLICATION EXPLORER ===== */
+
+/* Mode Toggle */
+.mul-mode-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin: 28px 0;
+}
+
+.mul-mode-btn {
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    border: 3px solid #ddd;
+    border-radius: 50px;
+    cursor: pointer;
+    background: #f0f0f5;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.mul-mode-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.mul-mode-btn.mul-mode-active {
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    color: white;
+    border-color: #0c3170;
+    box-shadow: 0 4px 18px rgba(26, 95, 212, 0.4);
+}
+
+/* ===== LEARN MODE ===== */
+.mul-learn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 10px;
+}
+
+@media (max-width: 800px) {
+    .mul-learn-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Blue Card */
+.mul-blue-card {
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    border-radius: 20px;
+    padding: 28px 26px;
+    color: #fff;
+    text-align: left;
+    box-shadow: 0 8px 30px rgba(26, 95, 212, 0.35);
+}
+
+.mul-blue-card h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.mul-blue-card p {
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.6;
+    margin: 8px 0;
+}
+
+.mul-blue-card b {
+    color: #fff;
+}
+
+/* Green Card */
+.mul-green-card {
+    background: linear-gradient(135deg, #fda95f, #fa9843);
+    border-radius: 20px;
+    padding: 28px 26px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(39, 174, 96, 0.35);
+}
+
+.mul-green-card h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.mul-green-card p {
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.6;
+    margin: 8px 0;
+}
+
+.mul-green-card b {
+    color: #fff;
+}
+
+/* Dark Code Block (inner) */
+.mul-code-block {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin: 14px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.mul-code-label {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Learn Mode Input Row */
+.mul-input-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.mul-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.mul-learn-input {
+    width: 90px;
+    padding: 14px 10px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    border: 3px solid rgba(255, 255, 255, 0.35);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mul-learn-input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.mul-learn-input:focus {
+    border-color: #fff;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
+}
+
+.mul-learn-input-green:focus {
+    border-color: #a8e6cf;
+    box-shadow: 0 0 0 4px rgba(168, 230, 207, 0.2);
+}
+
+.mul-input-times {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'Poppins', sans-serif;
+    margin-top: 20px;
+}
+
+@media (max-width: 500px) {
+    .mul-input-row {
+        gap: 10px;
+    }
+
+    .mul-learn-input {
+        width: 70px;
+        font-size: 1.3rem;
+        padding: 10px 8px;
+    }
+
+    .mul-input-times {
+        font-size: 1.4rem;
+    }
+}
+
+.mul-num-btn {
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 0;
+    margin: 0;
+}
+
+.mul-num-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.1);
+}
+
+.mul-num-btn.mul-num-selected {
+    background: #fff;
+    color: #2e86de;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+.mul-num-green.mul-num-selected {
+    color: #1e8449;
+}
+
+/* Formula Display */
+.mul-formula {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.mul-formula-num {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-size: 1.8rem;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    min-width: 50px;
+    text-align: center;
+}
+
+.mul-formula-green {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.mul-formula-sign {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Poppins', sans-serif;
+}
+
+.mul-formula-result {
+    background: #ffd700;
+    color: #1a1a2e;
+    padding: 8px 22px;
+    border-radius: 12px;
+    font-size: 1.8rem;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    min-width: 50px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+}
+
+.mul-addition-line {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    word-break: break-word;
+}
+
+/* Visual Grid */
+.mul-visual-grid {
+    margin: 14px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+}
+
+.mul-grid-row {
+    display: flex;
+    gap: 6px;
+}
+
+.mul-grid-dot {
+    width: 22px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+    transition: all 0.15s ease;
+}
+
+.mul-grid-dot:hover {
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(1.2);
+}
+
+.mul-grid-dot-active {
+    background: #ffd700 !important;
+    box-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+    transform: scale(1.05);
+}
+
+.mul-grid-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 30px 10px;
+}
+
+.mul-game-grid-section {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.mul-game-grid-label {
+    font-size: 1rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 12px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ===== GAME MODE ===== */
+.mul-game-wrapper {
+    margin-top: 10px;
+}
+
+/* Two-column layout for game mode (mirrors mul-learn-grid) */
+.mul-game-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 10px;
+}
+
+@media (max-width: 800px) {
+    .mul-game-grid-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Visual Hint Card */
+.mul-hint-card {
+    background: linear-gradient(135deg, #fda95f, #fa9843);
+    border-radius: 20px;
+    padding: 28px 26px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(230, 126, 34, 0.35);
+    display: flex;
+    flex-direction: column;
+}
+
+.mul-hint-card h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.mul-hint-card p {
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.6;
+    margin: 8px 0;
+}
+
+.mul-hint-card b {
+    color: #fff;
+}
+
+.mul-hint-placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 40px 10px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mul-hint-card .mul-visual-grid {
+    display: none;
+}
+
+.mul-purple-card {
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    border-radius: 22px;
+    padding: 34px 30px;
+    color: #fff;
+    text-align: left;
+    box-shadow: 0 10px 35px rgba(124, 58, 237, 0.35);
+}
+
+.mul-purple-card p {
+    color: rgba(255, 255, 255, 0.88);
+    margin: 10px 0 18px 0;
+    line-height: 1.6;
+}
+
+.mul-game-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.mul-game-header h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.mul-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mul-badge-green {
+    background: #27ae60;
+    color: #fff;
+}
+
+.mul-badge-dark {
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+/* Question Box */
+.mul-question-box {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+}
+
+.mul-question-label {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 14px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mul-var-tag {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 3px 12px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.mul-question-step {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    border-left: 4px solid #ffd700;
+}
+
+/* Answer Box */
+.mul-answer-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px 24px;
+    border: 2px dashed rgba(255, 255, 255, 0.25);
+}
+
+.mul-answer-label {
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.mul-answer-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.mul-answer-input {
+    flex: 1;
+    max-width: 200px;
+    padding: 14px 18px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.mul-answer-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.mul-answer-input:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.2);
+}
+
+.mul-check-btn {
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #e67e22, #fa9843);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(231, 76, 60, 0.4);
+    white-space: nowrap;
+}
+
+.mul-check-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.5);
+}
+
+/* Feedback */
+.mul-feedback {
+    margin-top: 16px;
+}
+
+.mul-feedback-correct {
+    background: linear-gradient(135deg, #27ae60, #1e8449);
+    padding: 16px 22px;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    animation: mulFeedbackPop 0.4s ease;
+}
+
+.mul-feedback-wrong {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    padding: 16px 22px;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    animation: mulFeedbackPop 0.4s ease;
+}
+
+@keyframes mulFeedbackPop {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Game Action Buttons */
+.mul-game-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.mul-start-btn {
+    padding: 16px 36px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #2e86de, #1a5fd4);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(26, 95, 212, 0.4);
+}
+
+.mul-start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(26, 95, 212, 0.55);
+}
+
+.mul-next-btn {
+    padding: 16px 36px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #27ae60, #1e8449);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+}
+
+.mul-next-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(39, 174, 96, 0.55);
+}
+
+.mul-reset-game-btn {
+    padding: 16px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    background: #f0f0f5;
+    color: #666;
+    border: 3px solid #ddd;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.mul-reset-game-btn:hover {
+    background: #e8e5ff;
+    border-color: #5a4fcf;
+    color: #5a4fcf;
+    transform: translateY(-2px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0;
+        padding: 70px 20px 30px 20px;
+    }
+
+    .card,
+    .card1 {
+        padding: 25px 20px;
+        width: 95%;
+    }
+
+    .jf-title {
+        font-size: 2rem;
+    }
+
+    .jf-label {
+        font-size: 1.2rem;
+    }
+
+    .mul-mode-toggle {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .mul-answer-row {
+        flex-direction: column;
+    }
+
+    .mul-answer-input {
+        max-width: 100%;
+    }
+
+    .mul-formula-num {
+        font-size: 1.3rem;
+        padding: 6px 12px;
+    }
+
+    .mul-formula-result {
+        font-size: 1.3rem;
+        padding: 6px 14px;
+    }
+}
+
+/* ========== CAR DISTANCE SIMULATOR ========== */
+
+.car-sim-header {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin: 16px 0 24px 0;
+}
+
+/* Story Problem Card */
+.car-sim-story-card {
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    border-radius: 20px;
+    padding: 30px 28px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 10px 35px rgba(124, 58, 237, 0.35);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.car-sim-story-card::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
+}
+
+.car-sim-story-icon {
+    font-size: 2.8rem;
+    margin-bottom: 8px;
+    animation: carIconBounce 2s ease-in-out infinite;
+}
+
+@keyframes carIconBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.car-sim-story-card h3 {
+    color: #ffd700;
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin: 0 0 12px 0;
+}
+
+.car-sim-story-text {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin: 0 0 18px 0;
+}
+
+.car-sim-story-text b {
+    color: #ffd700;
+}
+
+/* Equation display */
+.car-sim-equation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.car-sim-eq-num {
+    background: rgba(255, 255, 255, 0.18);
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.car-sim-eq-sign {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.car-sim-eq-result {
+    background: rgba(0, 0, 0, 0.25);
+    padding: 8px 22px;
+    border-radius: 12px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'Poppins', sans-serif;
+    min-width: 50px;
+}
+
+.car-sim-eq-revealed {
+    background: #ffd700;
+    color: #1a1a2e;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    animation: mulFeedbackPop 0.4s ease;
+}
+
+/* Answer Section */
+.car-sim-answer-section {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.car-sim-answer-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.car-sim-answer-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.car-sim-answer-input {
+    width: 140px;
+    padding: 14px 18px;
+    font-size: 1.3rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    border: 3px solid #ddd;
+    border-radius: 14px;
+    background: #f8f7ff;
+    color: #333;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.car-sim-answer-input:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
+}
+
+.car-sim-answer-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.car-sim-go-btn {
+    padding: 14px 32px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #27ae60, #1e8449);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(39, 174, 96, 0.4);
+}
+
+.car-sim-go-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.55);
+}
+
+.car-sim-go-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Road Track */
+.car-sim-road-wrapper {
+    margin: 10px 0 20px 0;
+    padding: 0 10px;
+}
+
+.car-sim-road {
+    position: relative;
+    background: linear-gradient(180deg, #3a3a4a 0%, #4a4a5a 100%);
+    height: 110px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.05);
+    border: 3px solid #555;
+}
+
+/* Dashed center lane line */
+.car-sim-lane-line {
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    right: 2%;
+    height: 3px;
+    transform: translateY(-50%);
+    background: repeating-linear-gradient(90deg,
+            #ffd700 0px,
+            #ffd700 20px,
+            transparent 20px,
+            transparent 35px);
+    opacity: 0.5;
+}
+
+/* Distance markers */
+.car-sim-markers {
+    position: absolute;
+    bottom: 0;
+    left: 2%;
+    right: 2%;
+    height: 100%;
+}
+
+.car-sim-marker {
+    position: absolute;
+    bottom: 0;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.car-sim-marker-line {
+    width: 2px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.car-sim-marker-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Poppins', sans-serif;
+    margin-top: 2px;
+}
+
+.car-sim-marker-small {
+    position: absolute;
+    bottom: 0;
+    width: 1px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-50%);
+}
+
+/* Flag */
+.car-sim-flag {
+    position: absolute;
+    top: 6px;
+    font-size: 1.6rem;
+    transform: translateX(-50%);
+    z-index: 5;
+    animation: carFlagWave 1s ease-in-out infinite;
+    left: 2%;
+    margin-left: 0;
+    /* JS will set left via percentage of the markers area */
+}
+
+@keyframes carFlagWave {
+
+    0%,
+    100% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+
+    25% {
+        transform: translateX(-50%) rotate(5deg);
+    }
+
+    75% {
+        transform: translateX(-50%) rotate(-5deg);
+    }
+}
+
+/* Car */
+.car-sim-car {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    transition: left 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* offset to align with markers: 2% road padding */
+    margin-left: 2%;
+}
+
+.car-sim-car img {
+    width: 50px;
+    height: 50px;
+    transform: rotate(90deg);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+/* Notification */
+.car-sim-notification {
+    text-align: center;
+    padding: 16px 24px;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 16px 0;
+    animation: mulFeedbackPop 0.4s ease;
+}
+
+.car-sim-notif-correct {
+    background: linear-gradient(135deg, #27ae60, #1e8449);
+    box-shadow: 0 4px 16px rgba(39, 174, 96, 0.35);
+}
+
+.car-sim-notif-wrong {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    box-shadow: 0 4px 16px rgba(231, 76, 60, 0.35);
+}
+
+.car-sim-notif-warning {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    box-shadow: 0 4px 16px rgba(243, 156, 18, 0.35);
+}
+
+/* Action Buttons */
+.car-sim-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+/* ===== Responsive for Car Simulator ===== */
+@media (max-width: 768px) {
+    .car-sim-story-card {
+        padding: 22px 18px;
+    }
+
+    .car-sim-story-icon {
+        font-size: 2rem;
+    }
+
+    .car-sim-story-text {
+        font-size: 0.95rem;
+    }
+
+    .car-sim-eq-num {
+        font-size: 1.2rem;
+        padding: 6px 14px;
+    }
+
+    .car-sim-eq-result {
+        font-size: 1.2rem;
+        padding: 6px 14px;
+    }
+
+    .car-sim-answer-row {
+        flex-direction: column;
+    }
+
+    .car-sim-answer-input {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .car-sim-road {
+        height: 90px;
+    }
+
+    .car-sim-car img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .car-sim-flag {
+        font-size: 1.2rem;
+    }
+
+    .car-sim-marker-label {
+        font-size: 0.6rem;
+    }
+}
