@@ -1,19 +1,20 @@
 {% extends 'jf1_base.html' %}
 {% load static %}
+{% block title %}Lesson 2 - Number Paths | SpikeMe{% endblock %}
 {% block lesson_css %}
 <link rel="stylesheet" href="{% static 'base_css/jf1_style/jf1_2.css' %}">
 {% endblock %}
 {% block lesson_content %}
 
     <div class="card">
-        <h1>🔢 What is Number Path?</h1>
+        <h1>🔢 <span class="gradient-text">What is Number Path?</span></h1>
         <p>A sequence number follows a <b>clear order or pattern.</b><br>
             👉 The numbers come one after another, and you can predict what comes next.</p>
         <div class="learn-box whole-box">
             <h2>⭐ Understanding Sequence and random</h2>
             <p>
-                <b>Sequence</b> is something that come in order and have a pattern. but,<br>
-                <b>random</b> is something that come unpredictable and not have any pattern
+                <b style="color: blueviolet;">Sequence</b> is something that come in order and have a pattern. but,<br>
+                <b style="color: blueviolet;">random</b> is something that come unpredictable and not have any pattern
             </p>
 
             <div class="example-container">
@@ -46,8 +47,8 @@
         <div class="learn-box decimal-box">
             <h2>🔢 Positive & Negative Number Explorer</h2>
             <p>
-                <b>Positive</b> is number that comes after 0 (zero) and bigger than zero <b>(positive > 0)</b><br>
-                <b>Negative</b> is number that come before 0 (zero) and less than zero <b>(negative < 0)</b>
+                <b style="color: rgb(226, 113, 43);">Positive</b> is number that comes after 0 (zero) and bigger than zero <b style="color: rgb(226, 113, 43);">(positive > 0)</b><br>
+                <b style="color: rgb(226, 113, 43);">Negative</b> is number that come before 0 (zero) and less than zero <b style="color: rgb(226, 113, 43);">(negative < 0)</b>
             </p>
 
             <div class="card">
@@ -76,7 +77,7 @@
     </div>
 
     <div class="card">
-        <h1 style="color: #5a4fcf; margin-top: 0;">🧩 Number Path Puzzle</h1>
+        <h1 style="margin-top: 0;">🧩 <span class="gradient-text">Number Path Puzzle</span></h1>
         <p style="color: #666; font-size: 1.1rem; margin-bottom: 5px;">
             <strong>Learning Goal:</strong> Practice number sequences by clicking tiles in order from
             <span style="color: #4b7bec; font-weight: bold;">1 → 9</span>
@@ -122,7 +123,7 @@
     </div>
 
     <div class="card1">
-        <h1 style="color: #5a4fcf; margin-top: 0;">⚙️ Motor Rotation Simulator</h1>
+        <h1 style="margin-top: 0;">⚙️ <span class="gradient-text">Motor Rotation Simulator</span></h1>
         <p style="color: #666; font-size: 1.1rem;">
             Control the motor using <strong>Forward</strong> and <strong>Backward</strong> buttons,
             or type your own rotation value!

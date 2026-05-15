@@ -3,7 +3,7 @@
     const cvs = document.getElementById('sg-canvas');
     const ctx = cvs.getContext('2d');
     const W = 760, H = 480, TILE = 40;
-    let running = false, score = 0, defeated = 0, lives = 3, round = 1;
+    let running = false, isPaused = false, score = 0, defeated = 0, lives = 3, round = 1;
     let player, monsters, bullets, particles, keys = {}, facing = 'right';
     let modalOpen = false, currentMonster = null;
 
@@ -51,6 +51,9 @@
         score = 0; defeated = 0; lives = 3; round = 1;
         player = { x: W / 2, y: H / 2, w: 32, h: 32, speed: 3.5, dir: 'right' };
         monsters = []; bullets = []; particles = [];
+        isPaused = false;
+        document.getElementById('sg-paused').style.display = 'none';
+        document.getElementById('sg-pause-btn').style.display = 'flex';
         genDecorations();
         spawnMonsters(2);
         updateHUD();
@@ -155,7 +158,7 @@
 
     /* Game loop */
     function update() {
-        if (!running || modalOpen) return;
+        if (!running || modalOpen || isPaused) return;
         // Player movement
         let dx = 0, dy = 0;
         if (keys['ArrowUp'] || keys['up']) { dy = -1; facing = 'up'; }
@@ -180,7 +183,7 @@
 
         // Check player-monster proximity
         monsters.forEach(m => {
-            if (dist(player, m) < 50 && !modalOpen) {
+            if (m.hp > 0 && dist(player, m) < 50 && !modalOpen) {
                 openModal(m);
             }
         });
@@ -242,28 +245,87 @@
         if (running) requestAnimationFrame(loop);
     }
 
-    /* Modal */
+    /* Modal — 2-step question flow */
+    let currentStep = 1; // 1 = concept identification, 2 = solve the answer
+
     function openModal(m) {
+        if (isPaused) return;
         modalOpen = true; currentMonster = m;
+        currentStep = 1;
         let q = genQuestion();
         currentMonster._question = q;
         document.getElementById('sg-modal-story').textContent = q.story;
-        document.getElementById('sg-modal-equation').textContent = q.eq;
+        // Hide equation during step 1 — force them to identify from the story
+        document.getElementById('sg-modal-equation').textContent = '❓';
+        document.getElementById('sg-modal-equation').style.opacity = '0.4';
         document.getElementById('sg-modal-input').value = '';
         document.getElementById('sg-modal-feedback').textContent = '';
         document.getElementById('sg-modal-feedback').className = '';
+        // Show step 1, hide step 2
+        document.getElementById('sg-step1').style.display = '';
+        document.getElementById('sg-step2').style.display = 'none';
+        // Reset step indicators
+        document.getElementById('sg-dot-1').classList.add('sg-step-active');
+        document.getElementById('sg-dot-2').classList.remove('sg-step-active');
+        document.getElementById('sg-dot-1').classList.remove('sg-step-done');
         document.getElementById('sg-modal').style.display = 'flex';
+    }
+
+    function goToStep2() {
+        currentStep = 2;
+        let q = currentMonster._question;
+        // Reveal the equation
+        document.getElementById('sg-modal-equation').textContent = q.eq;
+        document.getElementById('sg-modal-equation').style.opacity = '1';
+        // Switch steps
+        document.getElementById('sg-step1').style.display = 'none';
+        document.getElementById('sg-step2').style.display = '';
+        // Update step indicators
+        document.getElementById('sg-dot-1').classList.remove('sg-step-active');
+        document.getElementById('sg-dot-1').classList.add('sg-step-done');
+        document.getElementById('sg-dot-2').classList.add('sg-step-active');
+        // Clear feedback
+        document.getElementById('sg-modal-feedback').textContent = '';
+        document.getElementById('sg-modal-feedback').className = '';
         setTimeout(() => document.getElementById('sg-modal-input').focus(), 100);
     }
 
     function closeModal() {
         document.getElementById('sg-modal').style.display = 'none';
         modalOpen = false; currentMonster = null;
+        currentStep = 1;
     }
 
-    /* Check answer — exposed globally */
-    window.sgCheckAnswer = function () {
+    /* Step 1: Check concept identification — exposed globally */
+    window.sgCheckConcept = function (chosen) {
         if (!currentMonster) return;
+        let q = currentMonster._question;
+        let fb = document.getElementById('sg-modal-feedback');
+        // Determine the correct concept from the question type
+        let correctConcept = q.type === '×' ? 'multiplication' : 'division';
+
+        if (chosen === correctConcept) {
+            fb.textContent = `✅ Correct! This is a ${correctConcept} problem. Now solve it!`;
+            fb.className = 'sg-fb-correct';
+            score += 3; updateHUD();
+            setTimeout(goToStep2, 1000);
+        } else {
+            fb.textContent = `❌ Not quite! This is a ${correctConcept} problem. You lost a life!`;
+            fb.className = 'sg-fb-wrong';
+            lives--; updateHUD();
+            // Push player away
+            player.x = Math.max(40, Math.min(W - 40, player.x + (Math.random() - .5) * 120));
+            player.y = Math.max(40, Math.min(H - 40, player.y + (Math.random() - .5) * 120));
+            setTimeout(() => {
+                closeModal();
+                if (lives <= 0) gameOver();
+            }, 1200);
+        }
+    };
+
+    /* Step 2: Check answer — exposed globally */
+    window.sgCheckAnswer = function () {
+        if (!currentMonster || currentStep !== 2) return;
         let val = parseInt(document.getElementById('sg-modal-input').value);
         let q = currentMonster._question;
         let fb = document.getElementById('sg-modal-feedback');
@@ -305,7 +367,27 @@
         document.getElementById('sg-final-score').textContent = score;
         document.getElementById('sg-final-defeated').textContent = defeated;
         document.getElementById('sg-gameover').style.display = 'flex';
+        document.getElementById('sg-pause-btn').style.display = 'none';
     }
+
+    /* Pause and Quit */
+    window.sgTogglePause = function () {
+        if (!running || modalOpen) return;
+        isPaused = !isPaused;
+        if (isPaused) {
+            document.getElementById('sg-paused').style.display = 'flex';
+        } else {
+            document.getElementById('sg-paused').style.display = 'none';
+        }
+    };
+
+    window.sgQuitGame = function () {
+        running = false;
+        isPaused = false;
+        document.getElementById('sg-paused').style.display = 'none';
+        document.getElementById('sg-overlay').style.display = 'flex';
+        document.getElementById('sg-pause-btn').style.display = 'none';
+    };
 
     /* Start */
     window.sgStart = function () {

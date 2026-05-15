@@ -12,4 +12,5 @@ urlpatterns = [
     path('jf1_5/', views.jf1_5, name="jf1_5"),
     path('jf1_6/', views.jf1_6, name="jf1_6"),
     path('jf1_7/', views.jf1_7, name="jf1_7"),
+    path('jf1_8/', views.jf1_8, name="jf1_8"),
 ]

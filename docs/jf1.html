@@ -1,5 +1,6 @@
 {% extends 'jf1_base.html' %}
 {% load static %}
+{% block title %}Lesson 1 - Numbers & Decimals | SpikeMe{% endblock %}
 {% block lesson_css %}
 <link rel="stylesheet" href="{% static 'base_css/jf1_style/jf1.css' %}">
 {% endblock %}
@@ -7,13 +8,15 @@
     <div class="card">
         <!-- ================= EDUCATIONAL CONTENT ================= -->
 
-        <h1>🔢 Understanding about number ?</h1>
+        <h1>🔢 <span class="gradient-text">Understanding About Number ?</span></h1>
+        <p><b>Numbers are special symbols </b>that we can use to count, measure,and understand how much <br>
+            of something we have, like counting toys or knowing how many cookies are left.</p>
 
         <div class="learn-box whole-box">
             <h2>⭐ What is whole number ?</h2>
 
             <p>
-                Whole numbers represent <b>complete and full objects</b>.
+                Whole numbers represent <b style="color: blueviolet;">complete and full objects</b>.
                 They are numbers without any decimal point.
             </p>
 
@@ -32,9 +35,22 @@
                 <div class="example-box-top">
                     <h3 style="color: white;">🍎 Counting Fruits</h3>
                     <div class="example-box-top-inside">
-                        <p style="color: white; font-family: monospace; font-size:large;">
-                            If you have 4 apples, each apple is complete.<br>
-                            You cannot say 4 apples if one apple is half eaten.<br>
+                        <p style="color: rgb(246, 249, 66); font-family: monospace; font-size:large; text-align: left;">
+                            # If you have 4 apples, each apple is complete.<br>
+                            # You cannot say 4 apples if one apple is half eaten.<br>
+                        </p>
+
+                        <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left; line-height: 180%;">
+                            🍎 = 1 <br>
+                            <b>Amount</b> = 🍎 + 🍎 + 🍎 + 🍎
+                            Print("There's",<b>Amount</b>,"Apples")
+                        </p>
+
+                    </div>
+
+                    <div class="example-box-top-inside">
+                        <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left;">
+                            <b>Output :</b>There's 4 Apples
                         </p>
                     </div>
 
@@ -46,14 +62,23 @@
                 <div class="example-box-top">
                     <h3 style="color: white;">🎒 School Items</h3>
                     <div class="example-box-top-inside">
-                        <p style="color: white; font-family: monospace; font-size:large;">
-                            You bring 6 books to school.<br>
-                            Books are counted as complete objects.
+                        <p style="color: rgb(246, 249, 66); font-family: monospace; font-size:large; text-align: left;">
+                            # You bring 6 books to school.<br>
+                            # Books are counted as complete objects.
+
+                        <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left; line-height: 180%;">
+                            📕 = 1 <br>
+                            <b>Amount</b> = 📕 + 📕 + 📕 + 📕 + 📕 + 📕
+                            Print("There's",<b>Amount</b>,"Books")
                         </p>
                     </div>
-
+                    <div class="example-box-top-inside">
+                        <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left;">
+                            <b>Output :</b> There's 6 Books
+                        </p>
+                    </div>
                     <p style="color: white;">
-                        👉 6 is a whole number.
+                        👉 6 is a whole number because it shows total complete books
                     </p>
                 </div>
 
@@ -65,7 +90,7 @@
             <h2>⭐ What is Decimal Number?</h2>
 
             <p>
-                Decimal numbers show <b>parts of a whole</b>.
+                Decimal numbers show <b style="color: rgb(226, 113, 43);">parts of a whole</b>.
                 They always contain a decimal point (.).
             </p>
 
@@ -84,28 +109,53 @@
                 <div class="example-box-bottom">
                     <h3 style="color: white;">🍕 Sharing Pizza</h3>
                     <div class="example-box-bottom-inside">
-                        <p style="color: white; font-family: monospace; font-size:large;">
-                            You eat half of a pizza.<br>
-                            Half pizza can be written as <b>0.5 pizza</b>.<br>
+                        <p style="color: rgb(246, 249, 66); font-family: monospace; font-size:large; text-align: left;">
+                            # You already eat one and half pizza<br>
+                            # Half pizza can be written as <b>0.5 pizza</b>.<br>
+                        </p>
+
+                        <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left; line-height: 180%;">
+                            🍕 = 0.5 <br>
+                            <b>Amount</b> = 🍕 + 🍕 + 🍕
+                            <br>Print("You totally eat",<b>Amount</b>,"Pizza")
+                        </p>
+
+                    </div>
+                    <div class="example-box-bottom-inside">
+                        <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left;">
+                            <b>Output :</b> You totally eat 1.5 pizza
                         </p>
                     </div>
 
                     <p style="color: white;">
-                        👉 0.5 is a decimal number because it shows part of pizza.
+                        👉 1.5 is decimal, because it shows full and half pizza.
                     </p>
                 </div>
 
                 <div class="example-box-bottom">
-                    <h3 style="color: white;">🥛 Measuring Milk</h3>
+                    <h3 style="color: white;">🍐 Avocado Juice</h3>
                     <div class="example-box-bottom-inside">
-                        <p style="color: white; font-family: monospace; font-size:large;">
-                            A bottle contains <b>1.5 liters</b> of milk.<br>
-                            That means 1 full liter + half liter.
+                        <p style="color: rgb(246, 249, 66); font-family: monospace; font-size:large; text-align: left;">
+                            # You need <b>250 gram</b> avocado to make a juice.<br>
+                            # 1 avocado have 100 gram in weight
+                        </p>
+
+                        <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left; line-height: 180%;">
+                            🍐 = 1, 🥑 = 0.5 <br>
+                            <b>Amount</b> = 🍐 + 🍐 + 🥑
+                            <br>Print("You need",<b>Amount</b>,"Avocado")
+                        </p>
+
+                    </div>
+
+                    <div class="example-box-bottom-inside">
+                        <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left;">
+                            <b>Output :</b> You need 2.5 Avocado
                         </p>
                     </div>
 
                     <p style="color: white;">
-                        👉 1.5 is a decimal number.
+                        👉 2.5 is decimal. it shows 2 full + half avocado
                     </p>
                 </div>
 
@@ -115,7 +165,7 @@
     </div>
 
     <div class="card">
-        <h1>🔢 Decimal Number Explorer</h1>
+        <h1>🔢 <span class="gradient-text">Decimal Number Explorer</span></h1>
         <p>Slide, zoom to discover decimal numbers!</p>
 
         <!-- NUMBER LINE CONTROLS -->
@@ -135,12 +185,12 @@
     </div>
 
     <div class="card">
-        <h1>Learn Positive & Negative Rotation</h1>
+        <h1><span class="gradient-text">Learn Positive & Negative Rotation</span></h1>
         <div class="learn-box decimal-box">
 
             <h2>⭐ Rotation using decimal number</h2>
             <p>
-                Please test run the wheel below using <b>button</b> or <b>input decimal number</b>. and observe <br>
+                Please test run the wheel below using <b style="color: rgb(226, 113, 43);">button</b> or <b style="color: rgb(226, 113, 43);">input decimal number</b>. and observe <br>
                 what will happen to the wheel and how many circle's it will rotate
             </p>
 
@@ -177,6 +227,16 @@
                     <div id="score"></div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Custom Modal -->
+    <div id="customModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-icon" id="modalIcon"></div>
+            <h2 id="modalTitle">Title</h2>
+            <p id="modalMessage">Message</p>
+            <button class="modal-btn" onclick="closeModal()">OK</button>
         </div>
     </div>
 

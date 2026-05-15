@@ -30,4 +30,7 @@ def jf1_6(request):
 
 def jf1_7(request):
     return render(request,'jf1_7.html', {'active_lesson': 7})
+
+def jf1_8(request):
+    return render(request,'jf1_8.html', {'active_lesson': 8})
 # Create your views here.

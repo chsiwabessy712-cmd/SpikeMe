@@ -73,6 +73,22 @@ body::before {
     padding: 30px;
 }
 
+/* ===== PAGE TRANSITION ANIMATION ===== */
+@keyframes fadeSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+main {
+    animation: fadeSlideUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
 /* ===== CLOSE BUTTON (hidden on desktop) ===== */
 .sidebar-close-btn {
     display: none;

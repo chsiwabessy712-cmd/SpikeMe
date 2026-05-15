@@ -1,0 +1,294 @@
+{% extends 'jf1_base.html' %}
+{% load static %}
+{% block title %}Lesson 8 - Estimation | SpikeMe{% endblock %}
+{% block lesson_css %}
+<link rel="stylesheet" href="{% static 'base_css/jf1_style/jf1_8.css' %}">
+{% endblock %}
+{% block lesson_content %}
+
+<div class="card">
+    <h1>&#x1F31F; <span class="gradient-text">The Power of the "Smart Guess" (Estimation)</span></h1>
+    <p>
+        <b>Estimation</b> means making a <b>smart guess</b> about an answer without needing the exact number.<br>
+        we can estimate when <b>Counting takes too long, We need a quick answer, We want to predict something.</b>
+    </p>
+
+    <div class="learn-box whole-box">
+        <h2>
+            &#x1F3AF; Why Estimation is Important
+        </h2>
+        <p>
+            Estimation is <b style="color: blueviolet;">not random guessing.</b> It is a guess that is <b
+                style="color: blueviolet;">close to the real answer.</b>
+        </p>
+
+        <div class="example-container">
+            <div class="example-box-top">
+                <h3 style="color: white;">&#x1F4BB; With Estimation </h3>
+                <div class="example-box-top-inside">
+                    <p style="color: white; font-family: monospace; font-size:large;">
+                        &#x2022; Make Us Think faster <br>
+                        &#x2022; Solve Problems Quickly <br>
+                        &#x2022; Can Predict Result <br>
+                    </p>
+                </div>
+            </div>
+            <div class="example-box-top">
+                <h3 style="color: white;">&#x23F1;&#xFE0F; Without Estimation </h3>
+                <div class="example-box-top-inside">
+                    <p style="color: white; font-family: monospace; font-size:large;">
+                        &#x2022; Robots may crash <br>
+                        &#x2022; Time to programs become slow <br>
+                        &#x2022; Movements become inaccurate
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <h1>&#x1F9E0; <span class="gradient-text">Easy Examples of Estimation</span></h1>
+
+    <p>
+        Programmers use estimation to <b>plan, predict, and make decision to solve problem faster</b><br>
+        Below, there's easy example of estimation <b>based on several conditions</b> that occur.
+    </p>
+    <br>
+
+    <div class="compare-table">
+        <!-- Header Row -->
+        <div class="compare-row compare-header">
+            <div class="compare-cell">&#x1F527; Situation</div>
+            <div class="compare-cell">&#x1F916; Estimation</div>
+        </div>
+        <div class="compare-row">
+            <div class="compare-cell">How many candies in a jar? &#x1FAD9;</div>
+            <div class="compare-cell">&ldquo;Maybe around 50 candies!&rdquo;</div>
+        </div>
+        <div class="compare-row">
+            <div class="compare-cell">How long to clean your room? &#x1F9FC;</div>
+            <div class="compare-cell">&ldquo;About 10 minutes.&rdquo;</div>
+        </div>
+        <div class="compare-row">
+            <div class="compare-cell">Distance to school &#x1F463;</div>
+            <div class="compare-cell">&ldquo;About 2 kilometers.&rdquo;</div>
+        </div>
+        <div class="compare-row">
+            <div class="compare-cell">LEGO pieces in a box &#x1F9E9;</div>
+            <div class="compare-cell">&ldquo;Maybe 100 pieces.&rdquo;</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card">
+    <h1>&#x1F3AF; <span class="gradient-text">Three Cups One Ball</span></h1>
+    <p>
+        Test your <b>estimation and observation</b> skills! Win <b>3 rounds in a row</b> to complete the challenge. <br>
+        One wrong guess resets you to Round 1!. Each round adds <b>one more cup</b> to make it harder! &#x1F3C6;
+    </p>
+
+    <!-- HUD -->
+    <div id="sg-hud">
+        <div class="sg-hud-item"><span>&#x1F3AF; Round</span><span id="shell-round">1</span><span>/ 3</span></div>
+        <div class="sg-hud-item"><span>&#x1F964; Cups</span><span id="shell-cups">3</span></div>
+        <div class="sg-hud-item"><span>&#x2B50; Score</span><span id="shell-score">0</span></div>
+        <div class="sg-hud-item"><span>&#x1F525; Streak</span><span id="shell-streak">0</span></div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="shell-progress-bar">
+        <div class="shell-progress-step" id="prog-1"><span>1</span></div>
+        <div class="shell-progress-line" id="prog-line-1"></div>
+        <div class="shell-progress-step" id="prog-2"><span>2</span></div>
+        <div class="shell-progress-line" id="prog-line-2"></div>
+        <div class="shell-progress-step" id="prog-3"><span>3</span></div>
+    </div>
+
+    <!-- Game Area: cups are generated dynamically by JS -->
+    <div class="shell-game-area" id="shell-game-area" data-cup-img="{% static 'images/cup.png' %}">
+        <div class="ball" id="the-ball">&#x26BD;</div>
+        <!-- Cup elements are rendered here by JavaScript -->
+    </div>
+
+    <!-- Feedback -->
+    <div class="shell-feedback" id="shell-feedback">Press Start to play! &#x1F3AE;</div>
+
+    <!-- Start / Next Round Button -->
+    <button class="sg-btn-play shell-start-btn" id="shell-start-btn" onclick="startShellGame()">
+        &#x25B6; Start Game
+    </button>
+
+    <!-- Result Notification Modal -->
+    <div id="shell-modal" class="shell-modal-overlay">
+        <div class="shell-modal-box">
+            <div class="shell-modal-icon" id="shell-modal-icon"></div>
+            <h2 id="shell-modal-title">Correct!</h2>
+            <p id="shell-modal-message">Great job! You found the ball.</p>
+            <button class="sg-btn-play shell-modal-btn" id="shell-modal-btn" onclick="closeShellModal()">OK</button>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div id="shell-victory" class="shell-modal-overlay">
+        <div class="shell-modal-box shell-victory-box">
+            <div class="shell-modal-icon">&#x1F3C6;</div>
+            <h2>You Win!</h2>
+            <p id="shell-victory-msg">Amazing estimation skills! You completed all 3 rounds!</p>
+            <div class="shell-victory-score">
+                <span>Final Score: </span><b id="shell-victory-score">0</b>
+            </div>
+            <button class="sg-btn-play shell-modal-btn" onclick="resetShellGame()">&#x1F504; Play Again</button>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h1>🤖 <span class="gradient-text"> What is a Color Sensor?</span></h1>
+    <p>
+        A <b>color sensor </b>is a tool that helps a robot <b>see and recognize colors.</b><br>
+        It works like the robot’s eyes 👀 and help robot to make decision depend on the color sensed.
+    </p>
+
+    <div class="learn-box decimal-box">
+        <h2>🎯 Key Points to Remember</h2>
+
+        <p>
+            A color sensor helps robots <b style="color: rgb(226, 113, 43);">detect colors</b>.Robots use color <br>
+            as <b style="color: rgb(226, 113, 43);">information to make decisions</b>. Coding tells the robot what to do when colors are detected.
+        </p>
+        <div class="example-container">
+            <div class="example-box-bottom">
+                <h3 style="color: white;">🚦 Traffic Light System</h3>
+                <div class="example-box-bottom-inside">
+                    <p style="color: rgb(246, 249, 66); font-family: monospace; font-size:large; text-align: left;">
+                        # Color sensor using traffic light system<br>
+                        # Red to stop, Yellow to slow down, & green to move.
+                    </p>
+
+                    <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left; line-height: 180%;">
+                        <b>if</b> color sensor sense 🔴,<br>
+                        &emsp; stop()<br>
+                        <b>elif</b> color sensor sense 🟡,<br>
+                        &emsp; slow()<br>
+                        <b>elif </b>color sensor sense 🟢,<br>
+                        &emsp; move()
+                    </p>
+
+                </div>
+                <div class="example-box-bottom-inside">
+                    <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left;">
+                        <b>Output :</b> depend on color sensed
+                    </p>
+                </div>
+            </div>
+
+            <div class="example-box-bottom">
+                <h3 style="color: white;">🥑 Fruit Selector</h3>
+                <div class="example-box-bottom-inside">
+                    <p style="color: rgb(246, 249, 66); font-family: monospace; font-size:large; text-align: left;">
+                        # Use color sensor to differentiate fruit<br>
+                        # Each fruit represented according to its color
+                    </p>
+
+                    <p
+                        style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left; line-height: 180%;">
+                        <b>if</b> color sensor sense 🟣,<br>
+                        &emsp; grapes()<br>
+                        <b>elif</b> color sensor sense 🟢,<br>
+                        &emsp; Avocado()<br>
+                        <b>elif </b>color sensor sense 🔵,<br>
+                        &emsp; blueberry()
+                    </p>
+
+                </div>
+
+                <div class="example-box-bottom-inside">
+                    <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left;">
+                        <b>Output :</b> You need 2.5 Avocado
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+    <h2>🚦 Traffic Light Car Simulator</h2>
+    <p>
+        Click the <b>color buttons</b> below to simulate a color sensor! Watch how the car
+        reacts to each color — just like a real robot would.
+    </p>
+
+    <!-- Traffic Light Simulator -->
+    <div class="tl-simulator">
+        <!-- Road Track -->
+        <div class="tl-road" id="tl-road">
+            <div class="tl-road-line"></div>
+            <div class="tl-road-line"></div>
+            <div class="tl-road-line"></div>
+            <div class="tl-road-line"></div>
+            <div class="tl-road-line"></div>
+            <div class="tl-road-line"></div>
+            <div class="tl-road-line"></div>
+            <div class="tl-road-line"></div>
+            <img src="{% static 'images/car_top.svg' %}" class="tl-car" id="tl-car" alt="Car">
+        </div>
+
+        <!-- Controls Panel -->
+        <div class="tl-controls">
+            <!-- Traffic Light -->
+            <div class="tl-light-box">
+                <div class="tl-light-label">Color Sensor</div>
+                <div class="tl-light">
+                    <div class="tl-bulb tl-red" id="tl-bulb-red" onclick="senseColor('red')"></div>
+                    <div class="tl-bulb tl-yellow" id="tl-bulb-yellow" onclick="senseColor('yellow')"></div>
+                    <div class="tl-bulb tl-green" id="tl-bulb-green" onclick="senseColor('green')"></div>
+                </div>
+                <div class="tl-light-hint">Click a color!</div>
+            </div>
+
+            <!-- Status Panel -->
+            <div class="tl-status-panel">
+                <div class="tl-status-row">
+                    <span class="tl-status-label">Sensed Color:</span>
+                    <span class="tl-status-value" id="tl-sensed-color">None</span>
+                </div>
+                <div class="tl-status-row">
+                    <span class="tl-status-label">Car Action:</span>
+                    <span class="tl-status-value" id="tl-car-action">Waiting...</span>
+                </div>
+                <div class="tl-status-row">
+                    <span class="tl-status-label">Speed:</span>
+                    <span class="tl-status-value" id="tl-car-speed">0 km/h</span>
+                </div>
+                <div class="tl-countdown" id="tl-countdown" style="display:none;">
+                    <span>Resuming in </span><b id="tl-countdown-num">5</b><span>s</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Code Output -->
+        <div class="tl-code-output" id="tl-code-output">
+            <div class="tl-code-header">
+                <span class="tl-code-dot tl-code-dot-red"></span>
+                <span class="tl-code-dot tl-code-dot-yellow"></span>
+                <span class="tl-code-dot tl-code-dot-green"></span>
+                <span class="tl-code-title">robot_sensor.py</span>
+            </div>
+            <pre class="tl-code-body" id="tl-code-body"><span class="tl-code-comment"># Click a color to see the code run!</span>
+<span class="tl-code-keyword">color</span> = sensor.detect()
+<span class="tl-code-comment"># Waiting for input...</span></pre>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block lesson_js %}
+<script src="{% static 'javascript/jf1_script/jf1_8.js' %}"></script>
+{% endblock %}

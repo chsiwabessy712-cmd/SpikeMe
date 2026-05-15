@@ -50,7 +50,8 @@
 }
 
 #sg-overlay,
-#sg-gameover {
+#sg-gameover,
+#sg-paused {
     position: absolute;
     inset: 0;
     background: rgba(20, 10, 40, .88);
@@ -98,6 +99,17 @@
 .sg-btn-play:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 24px rgba(39, 174, 96, .55);
+}
+
+.sg-btn-quit {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(231, 76, 60, .4);
+}
+
+.sg-btn-quit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(231, 76, 60, .55);
 }
 
 .sg-btn-fire {
@@ -223,6 +235,120 @@
     background: linear-gradient(135deg, #e74c3c, #c0392b);
     color: #fff;
     animation: sgPop .3s ease;
+}
+
+/* ===== 2-STEP QUESTION FLOW ===== */
+
+/* Step indicator (1 — 2) */
+.sg-step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 16px 0 18px 0;
+}
+
+.sg-step-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #999;
+    font-weight: 900;
+    font-size: 0.85rem;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.sg-step-dot.sg-step-active {
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    color: #fff;
+    box-shadow: 0 3px 12px rgba(124, 58, 237, 0.4);
+    transform: scale(1.1);
+}
+
+.sg-step-dot.sg-step-done {
+    background: linear-gradient(135deg, #27ae60, #1e8449);
+    color: #fff;
+}
+
+.sg-step-line {
+    width: 40px;
+    height: 3px;
+    background: #e0e0e0;
+    border-radius: 2px;
+}
+
+/* Step label text */
+.sg-step-label {
+    font-weight: 800;
+    font-size: 1rem;
+    color: #5a4fcf;
+    margin: 0 0 14px 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Concept choice buttons row */
+.sg-concept-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.sg-concept-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 18px 28px;
+    border: 3px solid transparent;
+    border-radius: 18px;
+    font-weight: 800;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    min-width: 140px;
+}
+
+.sg-concept-icon {
+    font-size: 1.8rem;
+}
+
+.sg-concept-mul {
+    background: linear-gradient(135deg, #ede9fe, #f3f0ff);
+    color: #5b21b6;
+    border-color: #c4b5fd;
+}
+
+.sg-concept-mul:hover {
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    color: #fff;
+    border-color: #7c3aed;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+}
+
+.sg-concept-div {
+    background: linear-gradient(135deg, #fff7ed, #ffedd5);
+    color: #c2410c;
+    border-color: #fdba74;
+}
+
+.sg-concept-div:hover {
+    background: linear-gradient(135deg, #ea580c, #c2410c);
+    color: #fff;
+    border-color: #ea580c;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35);
+}
+
+.sg-concept-btn:active {
+    transform: scale(0.95);
 }
 
 /* D-Pad — vertical on the right */

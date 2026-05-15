@@ -1,12 +1,13 @@
 {% extends 'jf1_base.html' %}
 {% load static %}
+{% block title %}Lesson 3 - Motors & Movement | SpikeMe{% endblock %}
 {% block lesson_css %}
 <link rel="stylesheet" href="{% static 'base_css/jf1_style/jf1_3.css' %}">
 {% endblock %}
 {% block lesson_content %}
     <!-- Card Container -->
     <div class="card">
-        <h1>⚙️ Understanding motors</h1>
+        <h1>⚙️ <span class="gradient-text">Understanding motors</span></h1>
         <p>A <b>motor</b> is a part of a robot or car that <b>creates movement</b>.<br>
             👉 you can imagine motor is like a muscle for machines.</p>
         <br>
@@ -41,7 +42,7 @@
     </div>
 
     <div class="card">
-        <h1>🎮 Movement using motors</h1>
+        <h1>🎮 <span class="gradient-text">Movement using motors</span></h1>
         <p>A robot car usually has 2 motors,<b>left motor</b> to control left wheel and <b>right motor</b> to control
             right wheel<br>
             How the car moves depends on which motor is ON or OFF, and how fast it spins!</p>
@@ -87,7 +88,7 @@
         <div class="learn-box decimal-box">
             <h2>⬅️➡️ Turn left, right, and spin around</h2>
             <p>
-                <b style="color:rgb(226, 119, 43)">Turning</b> is a condition when car <b>make a movement (forward or
+                <b style="color:rgb(226, 119, 43)">Turning</b> is a condition when car <b>make a turning movement (forward or
                     backward)</b> to heading to another direction.<br>
                 But, <b style="color:rgb(226, 119, 43)">spinning</b> is a condition when car try heading to another direction,
                 but <b>the position of the car still same.</b><br><br>
@@ -121,7 +122,7 @@
 
     </div>
     <div class="card1">
-        <h1>🧪 Try It Yourself!</h1>
+        <h1>🧪 <span class="gradient-text">Try It Yourself!</span></h1>
         <p style="color: #666; font-size: 1.05rem;">
             Set the left and right motor speed, then press <b>RUN</b> to see how the car moves!
         </p>

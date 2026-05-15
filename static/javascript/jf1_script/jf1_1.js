@@ -91,7 +91,7 @@ function rotateFromInput() {
     let number = parseFloat(value);
 
     if (isNaN(number)) {
-        alert("Please enter a valid number");
+        showModal("Invalid Input", "Please enter a valid number", "⚠️");
         return;
     }
 
@@ -173,23 +173,48 @@ function showQuestion() {
 function checkAnswer(selected) {
 
     let correct = quizData[currentQuestion].answer;
+    let isCorrect = (selected === correct);
 
-    if (selected === correct) {
+    if (isCorrect) {
         score++;
-        alert("Correct! 🎉");
-    } else {
-        alert("Oops! Try again next time 😊");
     }
 
-    currentQuestion++;
+    let title = isCorrect ? "Correct!" : "Oops!";
+    let message = isCorrect ? "Awesome! You got the right answer." : "Not quite right. Let's try again next time!";
+    let icon = isCorrect ? "🎉" : "😅";
 
-    if (currentQuestion < quizData.length) {
-        showQuestion();
-    }
-    else {
-        document.getElementById("question").innerText = "Quiz Finished!";
-        document.getElementById("options").innerHTML = "";
-        document.getElementById("score").innerText =
-            "Your Score: " + score + "/" + quizData.length;
-    }
+    showModal(title, message, icon, () => {
+        currentQuestion++;
+
+        if (currentQuestion < quizData.length) {
+            showQuestion();
+        }
+        else {
+            document.getElementById("question").innerText = "Quiz Finished!";
+            document.getElementById("options").innerHTML = "";
+            document.getElementById("score").innerText =
+                "Your Score: " + score + "/" + quizData.length;
+        }
+    });
+}
+
+/* ===== CUSTOM MODAL FUNCTION ===== */
+function showModal(title, message, icon, callback) {
+    const modal = document.getElementById("customModal");
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalMessage").innerText = message;
+    document.getElementById("modalIcon").innerText = icon;
+    
+    window.closeModal = function() {
+        modal.classList.remove("show");
+        setTimeout(() => {
+            modal.style.display = "none";
+            if(callback) callback();
+        }, 300);
+    };
+    
+    modal.style.display = "flex";
+    setTimeout(() => {
+        modal.classList.add("show");
+    }, 10);
 }

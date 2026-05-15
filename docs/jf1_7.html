@@ -1,12 +1,13 @@
 {% extends 'jf1_base.html' %}
 {% load static %}
+{% block title %}Lesson 7 - Mul vs Division | SpikeMe{% endblock %}
 {% block lesson_css %}
 <link rel="stylesheet" href="{% static 'base_css/jf1_style/jf1_7.css' %}">
 {% endblock %}
 {% block lesson_content %}
 
     <div class="card">
-        <h1>🤖 Multiplication vs Division</h1>
+        <h1>🤖 <span class="gradient-text">Multiplication vs Division</span></h1>
         <p>
             “Multiplication helps robots and programs repeat actions and make totals.<br>
             Division helps robots and programs share things equally and break problems into smaller parts.
@@ -23,30 +24,56 @@
             </p>
             <div class="example-container">
                 <div class="example-box-top">
-                    <h3 style="color: white;">× Multiplication example</h3>
+                    <h3 style="color: white;">× Multiplication Example</h3>
                     <div class="example-box-top-inside">
-                        <p style="color: white; font-family: monospace; font-size:large;">
-                            ▫️ Combines equal groups<br>
-                            ▫️ Makes bigger amounts<br>
-                            ▫️ How many altogether?
+                        <p style="color: rgb(246, 249, 66); font-family: monospace; font-size:large; text-align: left;">
+                            # Combines amount from all groups<br>
+                            # Makes bigger amounts<br>
+                            # How many is the total value?
+                        </p>
+
+                        <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left; line-height: 180%;">
+                            📦 = 2 Books <br>
+                            <b>Amount = 3 x 📦</b>, in repeated addition 📦 + 📦 + 📦<br>
+                            Print("There's",<b>Amount</b>,"Books")
+                        </p>
+
+                    </div>
+                    <div class="example-box-top-inside">
+                        <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left;">
+                            <b>Output :</b> There's 6 Books
                         </p>
                     </div>
                     <p style="color: white;">
-                        Multiplication = Putting Groups Together
+                        👉 <b>Multiplication</b> = Putting Groups Together
                     </p>
                 </div>
 
                 <div class="example-box-top">
-                    <h3 style="color: white;">÷ Multiplication example</h3>
+                    <h3 style="color: white;">÷ Division Example</h3>
                     <div class="example-box-top-inside">
-                        <p style="color: white; font-family: monospace; font-size:large;">
-                            ▫️ Splits into equal groups<br>
-                            ▫️ Breaks into smaller parts<br>
-                            ▫️ How many in each group?
+                        <p style="color: rgb(246, 249, 66); font-family: monospace; font-size:large; text-align: left;">
+                            # Splits into equal groups<br>
+                            # Breaks into smaller parts<br>
+                            # How many in each group?
+                        </p>
+
+                        <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left; line-height: 180%;">
+                            🍐 = 1 Full Avocado, 🥑 = 0.5 Avocado<br>
+                            <b>Amount = 🍐 ÷ 2</b>, in repeated subtract 🍐 -  🥑 - 🥑 = 0 <br>
+                            Print("Each people got",<b>Amount</b>,"Avocado")
+                        </p>
+
+                    </div>
+
+                    <div class="example-box-top-inside">
+                        <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left;">
+                            <b>Output :</b> Each people got 0.5 Avocado
                         </p>
                     </div>
+
                     <p style="color: white;">
-                        Division = Sharing Equally
+                        👉 <b>Division</b> = Sharing Equally
                     </p>
                 </div>
 
@@ -83,7 +110,7 @@
                 </div>
 
                 <div class="compare-row">
-                    <div class="compare-cell">plitting teams/groups</div>
+                    <div class="compare-cell">Splitting teams/groups</div>
                     <div class="compare-cell">Division</div>
                 </div>
 
@@ -103,10 +130,10 @@
     </div>
 
     <div class="card1">
-        <h1 style="color: #5a4fcf; margin-top: 0;">🎯 Monster Splash – Math Shooting Game</h1>
+        <h1 style="margin-top: 0;">🎯 <span class="gradient-text">Monster Splash – Math Shooting Game</span></h1>
         <p style="color: #666; font-size: 1.1rem;">
             Use <b>Arrow Keys</b> to move your hero 🧑‍🚀 around the arena. Find monsters 👾 and answer
-            <b>multiplication</b> or <b>division</b> questions to shoot them with 💧 water bullets!
+            <b>multiplication</b> or <b>division</b> <br>questions to shoot them with 💧 water bullets!
         </p>
 
         <!-- HUD -->
@@ -115,6 +142,7 @@
             <div class="sg-hud-item"><span>👾 Defeated</span><span id="sg-defeated">0</span></div>
             <div class="sg-hud-item"><span>❤️ Lives</span><span id="sg-lives">3</span></div>
             <div class="sg-hud-item"><span>🎯 Round</span><span id="sg-round">1</span></div>
+            <button id="sg-pause-btn" class="sg-hud-item sg-btn-pause" onclick="sgTogglePause()" style="display: none; cursor: pointer; border: none; background: linear-gradient(135deg, #e67e22, #d35400);">⏸ Pause</button>
         </div>
 
         <!-- Game Area: Canvas + D-Pad side by side -->
@@ -123,6 +151,7 @@
             <div id="sg-canvas-wrap">
                 <canvas id="sg-canvas" width="760" height="480"></canvas>
                 <!-- Start overlay -->
+                 
                 <div id="sg-overlay">
                     <div class="sg-overlay-content">
                         <div style="font-size:3rem;">🧑‍🚀💧👾</div>
@@ -139,6 +168,17 @@
                         <p>Final Score: <b id="sg-final-score">0</b><br>Monsters Defeated: <b
                                 id="sg-final-defeated">0</b></p>
                         <button class="sg-btn sg-btn-play" onclick="sgStart()">🔄 Play Again</button>
+                    </div>
+                </div>
+                <!-- Paused overlay -->
+                <div id="sg-paused" style="display:none;">
+                    <div class="sg-overlay-content">
+                        <div style="font-size:3rem;">⏸</div>
+                        <h2>Game Paused</h2>
+                        <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+                            <button class="sg-btn sg-btn-play" onclick="sgTogglePause()">▶ Resume</button>
+                            <button class="sg-btn sg-btn-quit" onclick="sgQuitGame()">⏹ Quit</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -163,17 +203,45 @@
             </div>
         </div>
 
-        <!-- Question Modal -->
+        <!-- Question Modal (2-Step) -->
         <div id="sg-modal" style="display:none;">
             <div id="sg-modal-box">
                 <div id="sg-modal-icon">👾</div>
                 <h3 id="sg-modal-title">Monster Appeared!</h3>
                 <p id="sg-modal-story" class="sg-modal-story"></p>
                 <div id="sg-modal-equation"></div>
-                <div class="sg-modal-answer-row">
-                    <input type="number" id="sg-modal-input" placeholder="?" autocomplete="off">
-                    <button class="sg-btn sg-btn-fire" onclick="sgCheckAnswer()">💧 Fire!</button>
+
+                <!-- Step indicator -->
+                <div class="sg-step-indicator" id="sg-step-indicator">
+                    <span class="sg-step-dot sg-step-active" id="sg-dot-1">1</span>
+                    <span class="sg-step-line"></span>
+                    <span class="sg-step-dot" id="sg-dot-2">2</span>
                 </div>
+
+                <!-- Step 1: Identify the concept -->
+                <div id="sg-step1">
+                    <p class="sg-step-label">Step 1: What type of math is this?</p>
+                    <div class="sg-concept-row">
+                        <button class="sg-concept-btn sg-concept-mul" onclick="sgCheckConcept('multiplication')">
+                            <span class="sg-concept-icon">✖️</span>
+                            <span>Multiplication</span>
+                        </button>
+                        <button class="sg-concept-btn sg-concept-div" onclick="sgCheckConcept('division')">
+                            <span class="sg-concept-icon">➗</span>
+                            <span>Division</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Solve the problem -->
+                <div id="sg-step2" style="display:none;">
+                    <p class="sg-step-label">Step 2: Solve it! What is the answer?</p>
+                    <div class="sg-modal-answer-row">
+                        <input type="number" id="sg-modal-input" placeholder="?" autocomplete="off">
+                        <button class="sg-btn sg-btn-fire" onclick="sgCheckAnswer()">💧 Fire!</button>
+                    </div>
+                </div>
+
                 <div id="sg-modal-feedback"></div>
             </div>
         </div>
