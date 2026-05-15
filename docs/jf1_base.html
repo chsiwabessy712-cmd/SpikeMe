@@ -1,4 +1,5 @@
 {% extends 'navbar.html' %}
+{% block viewport %}<meta name="viewport" content="width=1280">{% endblock %}
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'base_css/base_lesson.css' %}">
@@ -10,7 +11,7 @@
     <div class="jf-header">
         <h2 class="jf-label">Junior Foundation 1</h2>
         <h1 class="jf-title" id="typing-jf-title">
-            <span class="highlight" id="text-jf-part" style="white-space: nowrap;"></span><span class="cursor">|</span>
+            <span class="highlight" id="text-jf-part"></span><span class="cursor">|</span>
         </h1>
         
         <style>

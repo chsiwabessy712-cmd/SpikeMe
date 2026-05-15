@@ -409,10 +409,11 @@
     }
 
     .btn {
-        width: 100%;
+        width: auto;
+        max-width: 260px;
         justify-content: center;
-        padding: 14px 20px;
-        font-size: 0.9rem;
+        padding: 12px 28px;
+        font-size: 0.88rem;
     }
 
     .hero-image {

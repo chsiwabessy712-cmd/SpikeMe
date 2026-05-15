@@ -8,6 +8,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: rgb(15, 15, 15);
+    overflow-x: hidden;
 }
 
 body::before {
