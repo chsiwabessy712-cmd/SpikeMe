@@ -225,20 +225,19 @@
 
                     <button class="quizBtn" onclick="startQuiz()">Start Quiz</button>
                     <div id="score"></div>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Custom Modal -->
-    <div id="customModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-icon" id="modalIcon"></div>
-            <h2 id="modalTitle">Title</h2>
-            <p id="modalMessage">Message</p>
-            <button class="modal-btn" onclick="closeModal()">OK</button>
-        </div>
+<!-- Custom Modal (outside .card to avoid transform breaking position:fixed) -->
+<div id="customModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-icon" id="modalIcon"></div>
+        <h2 id="modalTitle">Title</h2>
+        <p id="modalMessage">Message</p>
+        <button class="modal-btn" onclick="closeModal()">OK</button>
     </div>
+</div>
 
 {% endblock %}
 

@@ -156,7 +156,8 @@
 
         <p>
             A color sensor helps robots <b style="color: rgb(226, 113, 43);">detect colors</b>.Robots use color <br>
-            as <b style="color: rgb(226, 113, 43);">information to make decisions</b>. Coding tells the robot what to do when colors are detected.
+            as <b style="color: rgb(226, 113, 43);">information to make decisions</b>. Coding tells the robot what to do
+            when colors are detected.
         </p>
         <div class="example-container">
             <div class="example-box-bottom">
@@ -167,7 +168,8 @@
                         # Red to stop, Yellow to slow down, & green to move.
                     </p>
 
-                    <p style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left; line-height: 180%;">
+                    <p
+                        style="color: rgb(255, 255, 255); font-family: monospace; font-size:large; text-align: left; line-height: 180%;">
                         <b>if</b> color sensor sense 🔴,<br>
                         &emsp; stop()<br>
                         <b>elif</b> color sensor sense 🟡,<br>
@@ -210,80 +212,104 @@
                     </p>
                 </div>
             </div>
-
-        </div>
-
-
-
-
-    </div>
-    <h2>🚦 Traffic Light Car Simulator</h2>
-    <p>
-        Click the <b>color buttons</b> below to simulate a color sensor! Watch how the car
-        reacts to each color — just like a real robot would.
-    </p>
-
-    <!-- Traffic Light Simulator -->
-    <div class="tl-simulator">
-        <!-- Road Track -->
-        <div class="tl-road" id="tl-road">
-            <div class="tl-road-line"></div>
-            <div class="tl-road-line"></div>
-            <div class="tl-road-line"></div>
-            <div class="tl-road-line"></div>
-            <div class="tl-road-line"></div>
-            <div class="tl-road-line"></div>
-            <div class="tl-road-line"></div>
-            <div class="tl-road-line"></div>
-            <img src="{% static 'images/car_top.svg' %}" class="tl-car" id="tl-car" alt="Car">
-        </div>
-
-        <!-- Controls Panel -->
-        <div class="tl-controls">
-            <!-- Traffic Light -->
-            <div class="tl-light-box">
-                <div class="tl-light-label">Color Sensor</div>
-                <div class="tl-light">
-                    <div class="tl-bulb tl-red" id="tl-bulb-red" onclick="senseColor('red')"></div>
-                    <div class="tl-bulb tl-yellow" id="tl-bulb-yellow" onclick="senseColor('yellow')"></div>
-                    <div class="tl-bulb tl-green" id="tl-bulb-green" onclick="senseColor('green')"></div>
-                </div>
-                <div class="tl-light-hint">Click a color!</div>
-            </div>
-
-            <!-- Status Panel -->
-            <div class="tl-status-panel">
-                <div class="tl-status-row">
-                    <span class="tl-status-label">Sensed Color:</span>
-                    <span class="tl-status-value" id="tl-sensed-color">None</span>
-                </div>
-                <div class="tl-status-row">
-                    <span class="tl-status-label">Car Action:</span>
-                    <span class="tl-status-value" id="tl-car-action">Waiting...</span>
-                </div>
-                <div class="tl-status-row">
-                    <span class="tl-status-label">Speed:</span>
-                    <span class="tl-status-value" id="tl-car-speed">0 km/h</span>
-                </div>
-                <div class="tl-countdown" id="tl-countdown" style="display:none;">
-                    <span>Resuming in </span><b id="tl-countdown-num">5</b><span>s</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Live Code Output -->
-        <div class="tl-code-output" id="tl-code-output">
-            <div class="tl-code-header">
-                <span class="tl-code-dot tl-code-dot-red"></span>
-                <span class="tl-code-dot tl-code-dot-yellow"></span>
-                <span class="tl-code-dot tl-code-dot-green"></span>
-                <span class="tl-code-title">robot_sensor.py</span>
-            </div>
-            <pre class="tl-code-body" id="tl-code-body"><span class="tl-code-comment"># Click a color to see the code run!</span>
-<span class="tl-code-keyword">color</span> = sensor.detect()
-<span class="tl-code-comment"># Waiting for input...</span></pre>
         </div>
     </div>
+
+    <br><br>
+    <h1 style="margin-top: 0;">🚦 <span class="gradient-text">Traffic Light Car Simulator</span></h1>
+    <p style="color: #666; font-size: 1.05rem; margin-bottom: 24px;">
+            Follow the <b>color sequence</b> by clicking the traffic light in the correct order!
+            Complete <b>3 rounds</b> to win. Each round gets harder! 🏆
+        </p>
+
+        <!-- Round HUD -->
+        <div class="tl-hud" id="tl-hud" style="display:none;">
+            <div class="tl-hud-item">🎯 Round <span id="tl-round">1</span> / 3</div>
+            <div class="tl-hud-item">⭐ Score <span id="tl-score">0</span></div>
+            <div class="tl-hud-item">✅ Step <span id="tl-step">0</span> / <span id="tl-total-steps">3</span></div>
+        </div>
+
+        <!-- Play / Stop Buttons (centered) -->
+        <div class="tl-btn-group">
+            <button class="tl-btn tl-btn-play" id="tl-btn-play" onclick="startSimulator()">▶ Start Game</button>
+            <button class="tl-btn tl-btn-stop" id="tl-btn-stop" onclick="stopSimulator()" disabled>⏹ Stop</button>
+        </div>
+
+        <!-- Traffic Light Simulator -->
+        <div class="tl-simulator">
+            <div class="tl-main-layout">
+                <!-- LEFT: Traffic Light -->
+                <div class="tl-light-side">
+                    <div class="tl-light-box">
+                        <div class="tl-light-pole"></div>
+                        <div class="tl-light">
+                            <div class="tl-bulb tl-red" id="tl-bulb-red" onclick="senseColor('red')"></div>
+                            <div class="tl-bulb tl-yellow" id="tl-bulb-yellow" onclick="senseColor('yellow')"></div>
+                            <div class="tl-bulb tl-green" id="tl-bulb-green" onclick="senseColor('green')"></div>
+                        </div>
+                        <div class="tl-light-hint" id="tl-light-hint">Press Start!</div>
+                    </div>
+                </div>
+
+                <!-- CENTER: Road -->
+                <div class="tl-road-side">
+                    <div class="tl-road" id="tl-road">
+                        <div class="tl-road-surface">
+                            <div class="tl-road-line"></div>
+                            <div class="tl-road-line"></div>
+                            <div class="tl-road-line"></div>
+                            <div class="tl-road-line"></div>
+                            <div class="tl-road-line"></div>
+                            <div class="tl-road-line"></div>
+                            <div class="tl-road-line"></div>
+                            <div class="tl-road-line"></div>
+                            <img src="{% static 'images/car_top.svg' %}" class="tl-car" id="tl-car" alt="Car">
+                        </div>
+                    </div>
+
+                    <!-- Status + Sequence Row -->
+                    <div class="tl-info-row">
+                        <!-- Status Panel -->
+                        <div class="tl-status-panel">
+                            <div class="tl-status-row">
+                                <span class="tl-status-label">🔍 Sensed Color</span>
+                                <span class="tl-status-value" id="tl-sensed-color">None</span>
+                            </div>
+                            <div class="tl-status-row">
+                                <span class="tl-status-label">⚙️ Car Action</span>
+                                <span class="tl-status-value" id="tl-car-action">Waiting...</span>
+                            </div>
+                            <div class="tl-status-row">
+                                <span class="tl-status-label">🏎️ Speed</span>
+                                <span class="tl-status-value" id="tl-car-speed">0 km/h</span>
+                            </div>
+                            <div class="tl-countdown" id="tl-countdown" style="display:none;">
+                                <span>Resuming in </span><b id="tl-countdown-num">5</b><span>s</span>
+                            </div>
+                        </div>
+
+                        <!-- Color Sequence Panel -->
+                        <div class="tl-sequence-panel" id="tl-sequence-panel">
+                            <div class="tl-sequence-title">📋 Color Sequence</div>
+                            <div class="tl-sequence-list" id="tl-sequence-list">
+                                <!-- Circles generated by JS -->
+                            </div>
+                            <div class="tl-sequence-hint" id="tl-sequence-hint">Start the game to see the sequence!</div>
+                            <!-- Step Timer -->
+                            <div class="tl-step-timer" id="tl-step-timer" style="display:none;">
+                                <div class="tl-timer-bar-bg">
+                                    <div class="tl-timer-bar-fill" id="tl-timer-bar-fill"></div>
+                                </div>
+                                <span class="tl-timer-text" id="tl-timer-text">⏱ 5s</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Game Result Feedback -->
+    <div class="tl-feedback" id="tl-feedback"></div>
 
 </div>
 

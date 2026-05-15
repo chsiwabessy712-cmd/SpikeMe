@@ -139,7 +139,7 @@ function showCelebration() {
 // ===== CONFETTI EFFECT =====
 function createConfetti() {
     const colors = ['#6a1b9a', '#4b7bec', '#e67e22', '#2ecc71', '#e74c3c', '#f1c40f', '#ff6680'];
-    const card = document.querySelector('.card');
+    const card = document.getElementById('puzzleGrid').closest('.card');
 
     for (let i = 0; i < 50; i++) {
         let confetti = document.createElement('div');

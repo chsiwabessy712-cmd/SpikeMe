@@ -61,8 +61,8 @@
             container.setAttribute('data-cup-id', c);
 
             // Click handler via closure
-            (function(cupId) {
-                container.addEventListener('click', function() {
+            (function (cupId) {
+                container.addEventListener('click', function () {
                     guessShell(cupId);
                 });
             })(c);
@@ -456,171 +456,418 @@
 
 })();
 
-/* ===== TRAFFIC LIGHT CAR SIMULATOR ===== */
+/* ===== TRAFFIC LIGHT CAR SIMULATOR — GAME MODE ===== */
 (function () {
     'use strict';
 
-    var currentState = 'idle';   // idle, green, yellow, red
+    var TOTAL_ROUNDS = 3;
+    var BASE_STEPS = 3;
+    var STEP_TIME = 5;          // seconds per step
+
+    var round = 1;
+    var score = 0;
+    var stepIndex = 0;
+    var sequence = [];
+    var isRunning = false;
+    var hasEntered = false;
+    var currentSpeed = 0;
+    var lastColor = 'none';     // tracks previous sensed color for transitions
     var redTimer = null;
     var countdownInterval = null;
-    var countdownValue = 5;
+    var yellowSlowInterval = null;
+    var stepTimerInterval = null;
+    var stepTimeLeft = STEP_TIME;
 
     function $(id) { return document.getElementById(id); }
 
-    /* ===== ACTIVATE A BULB ===== */
-    function setActiveBulb(color) {
-        // Remove active from all bulbs
-        var bulbs = ['tl-bulb-red', 'tl-bulb-yellow', 'tl-bulb-green'];
-        for (var i = 0; i < bulbs.length; i++) {
-            var el = $(bulbs[i]);
-            if (el) el.classList.remove('active');
+    /* ===== SEQUENCE GENERATION (no same-color neighbors) ===== */
+    function generateSequence(length) {
+        var colors = ['red', 'yellow', 'green'];
+        var seq = [];
+        for (var i = 0; i < length; i++) {
+            var available = colors.slice();
+            // Remove the last color to prevent neighbors
+            if (seq.length > 0) {
+                var lastColor = seq[seq.length - 1];
+                available = available.filter(function (c) { return c !== lastColor; });
+            }
+            seq.push(available[Math.floor(Math.random() * available.length)]);
         }
-        // Activate the selected one
-        if (color === 'red') $('tl-bulb-red').classList.add('active');
-        if (color === 'yellow') $('tl-bulb-yellow').classList.add('active');
-        if (color === 'green') $('tl-bulb-green').classList.add('active');
+        return seq;
     }
 
-    /* ===== SET CAR STATE ===== */
+    function renderSequence() {
+        var list = $('tl-sequence-list');
+        if (!list) return;
+        list.innerHTML = '';
+        for (var i = 0; i < sequence.length; i++) {
+            var dot = document.createElement('div');
+            dot.className = 'tl-seq-dot seq-' + sequence[i];
+            dot.id = 'tl-seq-' + i;
+            if (i === 0) dot.classList.add('seq-active');
+            list.appendChild(dot);
+        }
+        var hint = $('tl-sequence-hint');
+        if (hint) hint.textContent = 'Click the colors in order!';
+    }
+
+    function highlightStep(idx) {
+        for (var i = 0; i < sequence.length; i++) {
+            var dot = $('tl-seq-' + i);
+            if (!dot) continue;
+            dot.classList.remove('seq-active', 'seq-wrong');
+            if (i < idx) dot.classList.add('seq-done');
+            if (i === idx) dot.classList.add('seq-active');
+        }
+    }
+
+    /* ===== HUD ===== */
+    function updateHUD() {
+        var r = $('tl-round');       if (r) r.textContent = round;
+        var s = $('tl-score');       if (s) s.textContent = score;
+        var st = $('tl-step');       if (st) st.textContent = stepIndex;
+        var ts = $('tl-total-steps'); if (ts) ts.textContent = sequence.length;
+    }
+
+    /* ===== STEP TIMER (5 seconds per step) ===== */
+    function startStepTimer() {
+        stopStepTimer();
+        stepTimeLeft = STEP_TIME;
+        var timerEl = $('tl-step-timer');
+        var barFill = $('tl-timer-bar-fill');
+        var timerText = $('tl-timer-text');
+        if (timerEl) timerEl.style.display = 'flex';
+        if (barFill) { barFill.style.width = '100%'; barFill.className = 'tl-timer-bar-fill'; }
+        if (timerText) timerText.textContent = '⏱ ' + STEP_TIME + 's';
+
+        stepTimerInterval = setInterval(function () {
+            stepTimeLeft -= 0.25;
+            var pct = Math.max(0, (stepTimeLeft / STEP_TIME) * 100);
+            if (barFill) barFill.style.width = pct + '%';
+            if (timerText) timerText.textContent = '⏱ ' + Math.ceil(stepTimeLeft) + 's';
+
+            // Color transitions
+            if (barFill) {
+                barFill.classList.remove('warning', 'danger');
+                if (stepTimeLeft <= 1) barFill.classList.add('danger');
+                else if (stepTimeLeft <= 3) barFill.classList.add('warning');
+            }
+
+            if (stepTimeLeft <= 0) {
+                stopStepTimer();
+                // Time's up — treat as wrong
+                setFeedback('⏱ Time\'s up! Expected ' + sequence[stepIndex].toUpperCase() + '.', '#ef4444');
+                var dot = $('tl-seq-' + stepIndex);
+                if (dot) {
+                    dot.classList.add('seq-wrong');
+                    setTimeout(function () { if (dot) dot.classList.remove('seq-wrong'); }, 600);
+                }
+                // Restart the timer for another chance
+                setTimeout(function () {
+                    if (isRunning && stepIndex < sequence.length) {
+                        setFeedback('Try again! Click ' + sequence[stepIndex].toUpperCase(), '#d97706');
+                        startStepTimer();
+                    }
+                }, 800);
+            }
+        }, 250);
+    }
+
+    function stopStepTimer() {
+        if (stepTimerInterval) { clearInterval(stepTimerInterval); stepTimerInterval = null; }
+        var timerEl = $('tl-step-timer');
+        if (timerEl) timerEl.style.display = 'none';
+    }
+
+    /* ===== BUTTON / BULB HELPERS ===== */
+    function setBulbsEnabled(on) {
+        var bulbs = document.querySelectorAll('.tl-bulb');
+        for (var i = 0; i < bulbs.length; i++) {
+            bulbs[i].style.pointerEvents = on ? 'auto' : 'none';
+            bulbs[i].style.opacity = on ? '1' : '0.4';
+        }
+    }
+
+    function updateButtons() {
+        var p = $('tl-btn-play'); if (p) p.disabled = isRunning;
+        var s = $('tl-btn-stop'); if (s) s.disabled = !isRunning;
+    }
+
+    function setFeedback(text, color) {
+        var fb = $('tl-feedback');
+        if (fb) { fb.textContent = text; fb.style.color = color || '#555'; }
+    }
+
+    /* ===== START GAME ===== */
+    window.startSimulator = function () {
+        if (isRunning) return;
+        isRunning = true;
+        round = 1; score = 0; stepIndex = 0;
+        hasEntered = false;
+        var playBtn = $('tl-btn-play');
+        if (playBtn) playBtn.textContent = '▶ Start Game';
+        updateButtons();
+        var hud = $('tl-hud'); if (hud) hud.style.display = 'flex';
+        startRound();
+    };
+
+    function startRound() {
+        stepIndex = 0;
+        clearTimers();
+        sequence = generateSequence(BASE_STEPS + (round - 1));
+        renderSequence();
+        updateHUD();
+        setBulbsEnabled(true);
+        setFeedback('Round ' + round + ' — Follow the sequence!', '#7c3aed');
+        var hint = $('tl-light-hint'); if (hint) hint.textContent = '👆 Click!';
+        setActiveBulb('none');
+        resetCar();
+        lastColor = 'none';
+        updateStatus('none', 'Waiting...', '0 km/h');
+        startStepTimer();
+    }
+
+    /* ===== STOP GAME ===== */
+    window.stopSimulator = function () {
+        if (!isRunning) return;
+        isRunning = false;
+        updateButtons();
+        clearTimers();
+        stopStepTimer();
+        setBulbsEnabled(false);
+        setActiveBulb('none');
+        resetCar();
+        setFeedback('');
+        var hud = $('tl-hud'); if (hud) hud.style.display = 'none';
+        var hint = $('tl-light-hint'); if (hint) hint.textContent = 'Press Start!';
+        var seqHint = $('tl-sequence-hint');
+        if (seqHint) seqHint.textContent = 'Start the game to see the sequence!';
+        var list = $('tl-sequence-list'); if (list) list.innerHTML = '';
+        updateStatus('none', 'Waiting...', '0 km/h');
+    };
+
+    /* ===== BULB CONTROL ===== */
+    function setActiveBulb(color) {
+        var ids = ['tl-bulb-red', 'tl-bulb-yellow', 'tl-bulb-green'];
+        for (var i = 0; i < ids.length; i++) {
+            var el = $(ids[i]); if (el) el.classList.remove('active');
+        }
+        if (color === 'red')    $('tl-bulb-red').classList.add('active');
+        if (color === 'yellow') $('tl-bulb-yellow').classList.add('active');
+        if (color === 'green')  $('tl-bulb-green').classList.add('active');
+    }
+
+    /* ===== SMOOTH SPEED TRANSITIONS ===== */
+    function clearSpeedTransition() {
+        if (yellowSlowInterval) { clearInterval(yellowSlowInterval); yellowSlowInterval = null; }
+    }
+
+    /* Smoothly change speed from current to target over duration ms */
+    function smoothSpeedTransition(targetSpeed, duration, onComplete) {
+        clearSpeedTransition();
+        var startSpeed = currentSpeed;
+        var steps = 12;
+        var stepTime = duration / steps;
+        var speedChange = (targetSpeed - startSpeed) / steps;
+        var car = $('tl-car');
+        var road = $('tl-road');
+        var step = 0;
+
+        yellowSlowInterval = setInterval(function () {
+            step++;
+            currentSpeed += speedChange;
+
+            // Switch road animation speed at midpoint
+            if (car && road && step === Math.floor(steps / 2)) {
+                if (targetSpeed <= 0) {
+                    car.classList.remove('driving', 'slowing');
+                    road.classList.remove('road-moving');
+                    car.classList.add('slowing');
+                    road.classList.add('road-slow');
+                } else if (targetSpeed <= 30) {
+                    car.classList.remove('driving');
+                    road.classList.remove('road-moving');
+                    car.classList.add('slowing');
+                    road.classList.add('road-slow');
+                }
+            }
+
+            if (step >= steps) {
+                currentSpeed = targetSpeed;
+                clearSpeedTransition();
+                if (targetSpeed <= 0 && car && road) {
+                    car.classList.remove('driving', 'slowing');
+                    road.classList.remove('road-moving', 'road-slow');
+                    car.classList.add('stopped');
+                }
+                if (onComplete) onComplete();
+            }
+
+            var sp = $('tl-car-speed');
+            if (sp) sp.textContent = Math.max(0, Math.round(currentSpeed)) + ' km/h';
+        }, stepTime);
+    }
+
+    /* ===== CAR STATE (context-aware) ===== */
     function setCarState(state) {
         var car = $('tl-car');
         var road = $('tl-road');
         if (!car || !road) return;
 
-        // Clear all animation classes
+        if (!hasEntered) {
+            hasEntered = true;
+            car.classList.add('entering');
+            car.addEventListener('animationend', function h() {
+                car.classList.remove('entering');
+                car.removeEventListener('animationend', h);
+            });
+        }
+
         car.classList.remove('driving', 'slowing', 'stopped');
         road.classList.remove('road-moving', 'road-slow');
 
+        var wasMoving = (lastColor === 'green');
+        var wasSlow = (lastColor === 'yellow');
+
         if (state === 'green') {
+            /* Always: car drives fast */
             car.classList.add('driving');
             road.classList.add('road-moving');
+            smoothSpeedTransition(60, 800);
+
         } else if (state === 'yellow') {
-            car.classList.add('slowing');
-            road.classList.add('road-slow');
+            if (wasMoving) {
+                /* After green: smooth transition fast → slow */
+                car.classList.add('driving');
+                road.classList.add('road-moving');
+                smoothSpeedTransition(20, 2000);
+            } else {
+                /* First click or after red: just start slow */
+                currentSpeed = 20;
+                car.classList.add('slowing');
+                road.classList.add('road-slow');
+                var sp = $('tl-car-speed');
+                if (sp) sp.textContent = '20 km/h';
+            }
+
         } else if (state === 'red') {
-            car.classList.add('stopped');
-            // Stop car at current position
-            var computedLeft = window.getComputedStyle(car).left;
-            car.style.left = computedLeft;
-            // Force reflow then clear animation
-            void car.offsetWidth;
-            car.classList.remove('driving', 'slowing');
-            car.classList.add('stopped');
+            if (wasMoving) {
+                /* After green: smooth deceleration to stop */
+                car.classList.add('driving');
+                road.classList.add('road-moving');
+                smoothSpeedTransition(0, 1500);
+            } else if (wasSlow) {
+                /* After yellow: quick stop from slow */
+                car.classList.add('slowing');
+                road.classList.add('road-slow');
+                smoothSpeedTransition(0, 800);
+            } else {
+                /* First click or already stopped: just stop */
+                currentSpeed = 0;
+                car.classList.add('stopped');
+                var sp = $('tl-car-speed');
+                if (sp) sp.textContent = '0 km/h';
+            }
         }
     }
 
-    /* ===== UPDATE STATUS PANEL ===== */
+    function resetCar() {
+        clearSpeedTransition();
+        currentSpeed = 0;
+        var car = $('tl-car');
+        var road = $('tl-road');
+        if (car) car.classList.remove('driving', 'slowing', 'stopped', 'entering');
+        if (road) road.classList.remove('road-moving', 'road-slow');
+    }
+
+    /* ===== STATUS PANEL ===== */
     function updateStatus(color, action, speed) {
-        var sensedEl = $('tl-sensed-color');
-        var actionEl = $('tl-car-action');
-        var speedEl = $('tl-car-speed');
-
-        if (sensedEl) {
-            sensedEl.textContent = color.charAt(0).toUpperCase() + color.slice(1);
-            if (color === 'red') sensedEl.style.color = '#dc2626';
-            else if (color === 'yellow') sensedEl.style.color = '#d97706';
-            else if (color === 'green') sensedEl.style.color = '#16a34a';
-            else sensedEl.style.color = '#1a1a2e';
+        var se = $('tl-sensed-color');
+        var ae = $('tl-car-action');
+        var sp = $('tl-car-speed');
+        if (se) {
+            se.textContent = color.charAt(0).toUpperCase() + color.slice(1);
+            se.style.color = color === 'red' ? '#dc2626'
+                           : color === 'yellow' ? '#d97706'
+                           : color === 'green' ? '#16a34a' : '#1a1a2e';
         }
-        if (actionEl) actionEl.textContent = action;
-        if (speedEl) speedEl.textContent = speed;
+        if (ae) ae.textContent = action;
+        if (sp) sp.textContent = speed;
     }
 
-    /* ===== UPDATE LIVE CODE ===== */
-    function updateCode(color) {
-        var codeBody = $('tl-code-body');
-        if (!codeBody) return;
-
-        var lines = [];
-        lines.push('<span class="tl-code-keyword">color</span> = sensor.<span class="tl-code-function">detect</span>()');
-        lines.push('<span class="tl-code-comment"># color sensed: <span class="tl-code-string">"' + color + '"</span></span>');
-        lines.push('');
-
-        if (color === 'red') {
-            lines.push('<span class="tl-code-active-line"><span class="tl-code-keyword">if</span> color == <span class="tl-code-string">"red"</span>:</span>');
-            lines.push('<span class="tl-code-active-line">    motor.<span class="tl-code-function">stop</span>()  <span class="tl-code-comment"># Stop for 5 seconds</span></span>');
-            lines.push('<span class="tl-code-keyword">elif</span> color == <span class="tl-code-string">"yellow"</span>:');
-            lines.push('    motor.<span class="tl-code-function">slow</span>()');
-            lines.push('<span class="tl-code-keyword">elif</span> color == <span class="tl-code-string">"green"</span>:');
-            lines.push('    motor.<span class="tl-code-function">move</span>()');
-        } else if (color === 'yellow') {
-            lines.push('<span class="tl-code-keyword">if</span> color == <span class="tl-code-string">"red"</span>:');
-            lines.push('    motor.<span class="tl-code-function">stop</span>()');
-            lines.push('<span class="tl-code-active-line"><span class="tl-code-keyword">elif</span> color == <span class="tl-code-string">"yellow"</span>:</span>');
-            lines.push('<span class="tl-code-active-line">    motor.<span class="tl-code-function">slow</span>()  <span class="tl-code-comment"># Slow down!</span></span>');
-            lines.push('<span class="tl-code-keyword">elif</span> color == <span class="tl-code-string">"green"</span>:');
-            lines.push('    motor.<span class="tl-code-function">move</span>()');
-        } else if (color === 'green') {
-            lines.push('<span class="tl-code-keyword">if</span> color == <span class="tl-code-string">"red"</span>:');
-            lines.push('    motor.<span class="tl-code-function">stop</span>()');
-            lines.push('<span class="tl-code-keyword">elif</span> color == <span class="tl-code-string">"yellow"</span>:');
-            lines.push('    motor.<span class="tl-code-function">slow</span>()');
-            lines.push('<span class="tl-code-active-line"><span class="tl-code-keyword">elif</span> color == <span class="tl-code-string">"green"</span>:</span>');
-            lines.push('<span class="tl-code-active-line">    motor.<span class="tl-code-function">move</span>()  <span class="tl-code-comment"># Full speed!</span></span>');
-        }
-
-        codeBody.innerHTML = lines.join('\n');
-    }
-
-    /* ===== CLEAR TIMERS ===== */
+    /* ===== TIMERS ===== */
     function clearTimers() {
         if (redTimer) { clearTimeout(redTimer); redTimer = null; }
         if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
-        var cdEl = $('tl-countdown');
-        if (cdEl) cdEl.style.display = 'none';
+        clearSpeedTransition();
+        var cd = $('tl-countdown'); if (cd) cd.style.display = 'none';
     }
 
-    /* ===== START RED COUNTDOWN ===== */
-    function startRedCountdown() {
-        countdownValue = 5;
-        var cdEl = $('tl-countdown');
-        var cdNum = $('tl-countdown-num');
-        if (cdEl) cdEl.style.display = 'block';
-        if (cdNum) cdNum.textContent = countdownValue;
-
-        countdownInterval = setInterval(function () {
-            countdownValue--;
-            if (cdNum) cdNum.textContent = countdownValue;
-
-            if (countdownValue <= 0) {
-                clearInterval(countdownInterval);
-                countdownInterval = null;
-                if (cdEl) cdEl.style.display = 'none';
-
-                // Auto-resume to green after 5 seconds
-                currentState = 'green';
-                setActiveBulb('green');
-                setCarState('green');
-                updateStatus('green', 'move()', '60 km/h');
-                updateCode('green');
-            }
-        }, 1000);
-    }
-
-    /* ===== MAIN COLOR SENSE FUNCTION ===== */
+    /* ===== MAIN SENSE FUNCTION (GAME MODE) ===== */
     window.senseColor = function (color) {
+        if (!isRunning || stepIndex >= sequence.length) return;
         clearTimers();
 
-        currentState = color;
-        setActiveBulb(color);
+        var expected = sequence[stepIndex];
 
-        if (color === 'green') {
-            setCarState('green');
-            updateStatus('green', 'move()', '60 km/h');
-            updateCode('green');
+        if (color === expected) {
+            score += 10;
+            stepIndex++;
+            setActiveBulb(color);
 
-        } else if (color === 'yellow') {
-            setCarState('yellow');
-            updateStatus('yellow', 'slow()', '20 km/h');
-            updateCode('yellow');
+            setCarState(color);
 
-        } else if (color === 'red') {
-            setCarState('red');
-            updateStatus('red', 'stop()', '0 km/h');
-            updateCode('red');
-            startRedCountdown();
+            if (color === 'green') {
+                updateStatus('green', 'move()', currentSpeed + ' km/h');
+            } else if (color === 'yellow') {
+                updateStatus('yellow', 'slow()', currentSpeed + ' km/h');
+            } else if (color === 'red') {
+                updateStatus('red', 'stop()', currentSpeed + ' km/h');
+            }
+
+            lastColor = color;
+
+            highlightStep(stepIndex);
+            updateHUD();
+
+            if (stepIndex >= sequence.length) {
+                stopStepTimer();
+                setBulbsEnabled(false);
+                if (round >= TOTAL_ROUNDS) {
+                    setFeedback('🏆 You Win! Final Score: ' + score, '#10b981');
+                    var seqHint = $('tl-sequence-hint');
+                    if (seqHint) seqHint.textContent = 'Amazing! All rounds complete!';
+                    var playBtn = $('tl-btn-play');
+                    if (playBtn) { playBtn.disabled = false; playBtn.textContent = '🔄 Play Again'; }
+                    isRunning = false;
+                    updateButtons();
+                } else {
+                    setFeedback('✅ Round ' + round + ' Complete! +' + (sequence.length * 10) + ' pts', '#10b981');
+                    setTimeout(function () {
+                        round++;
+                        startRound();
+                    }, 1800);
+                }
+            } else {
+                setFeedback('✅ Correct! Next: step ' + (stepIndex + 1) + ' of ' + sequence.length, '#10b981');
+                startStepTimer();
+            }
+        } else {
+            var dot = $('tl-seq-' + stepIndex);
+            if (dot) dot.classList.add('seq-wrong');
+            setFeedback('❌ Wrong! Expected ' + expected.toUpperCase() + '. Try again!', '#ef4444');
+            setTimeout(function () {
+                if (dot) dot.classList.remove('seq-wrong');
+            }, 500);
+            // Restart timer on wrong answer
+            startStepTimer();
         }
     };
+
+    /* ===== INIT ===== */
+    document.addEventListener('DOMContentLoaded', function () {
+        setBulbsEnabled(false);
+    });
 
 })();
 

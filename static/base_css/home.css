@@ -244,8 +244,14 @@
    RESPONSIVE BREAKPOINTS
    ======================================================= */
 
-/* ===== TABLET: ≤1024px (sidebar still visible) ===== */
+/* ===== TABLET: ≤1024px (hamburger replaces sidebar) ===== */
 @media (max-width: 1024px) {
+    .content {
+        margin-left: 0;
+        padding: 70px 0 30px 0;
+        min-height: auto;
+    }
+
     .hero-section {
         flex-direction: column;
         text-align: center;
@@ -297,13 +303,8 @@
     }
 }
 
-/* ===== MOBILE: ≤768px (hamburger menu replaces sidebar) ===== */
+/* ===== MOBILE: ≤768px ===== */
 @media (max-width: 768px) {
-    .content {
-        margin-left: 0;
-        padding: 70px 0 30px 0;
-        min-height: auto;
-    }
 
     .hero-section {
         flex-direction: column;

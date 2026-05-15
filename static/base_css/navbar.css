@@ -105,9 +105,9 @@ main {
 }
 
 /* ===================================================
-   RESPONSIVE: Tablet & Phone (≤768px)
+   RESPONSIVE: Tablet & Phone (≤1024px)
    =================================================== */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
     /* Sidebar slides off-screen by default */
     .sidebar {

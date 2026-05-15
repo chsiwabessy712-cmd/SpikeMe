@@ -331,24 +331,210 @@ h1 {
     transform: translateY(0) !important;
 }
 
-/* ===== RESPONSIVE: Mobile (≤768px) ===== */
-@media (max-width: 768px) {
+/* ===== RESPONSIVE: Tablet (≤1024px) ===== */
+@media (max-width: 1024px) {
     .content {
         margin-left: 0;
-        padding: 70px 20px 30px 20px;
+        padding: 70px 30px 30px 30px;
     }
 
     .card,
     .card1 {
-        padding: 25px 20px;
+        padding: 40px 35px;
         width: 95%;
     }
 
     .jf-title {
-        font-size: 2rem;
+        font-size: 2.4rem;
+    }
+
+    .lesson-card {
+        width: 78px;
+        height: 88px;
+    }
+
+    .lesson-number {
+        font-size: 1.7rem;
+    }
+
+    .compare-table {
+        max-width: 100%;
+    }
+
+    .example-container {
+        grid-template-columns: 1fr;
+    }
+
+    .card,
+    .card1 {
+        overflow: hidden;
+    }
+
+    .example-box-top p,
+    .example-box-top-inside p,
+    .example-box-bottom p,
+    .example-box-bottom-inside p,
+    .example-box p {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+}
+
+/* ===== RESPONSIVE: Mobile (≤768px) ===== */
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0;
+        padding: 70px 16px 30px 16px;
+    }
+
+    .jf-header {
+        margin-bottom: 30px;
+    }
+
+    .jf-title {
+        font-size: 1.8rem;
     }
 
     .jf-label {
+        font-size: 1.1rem;
+    }
+
+    .jf-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .lesson-grid {
+        gap: 10px;
+    }
+
+    .lesson-card {
+        width: 65px;
+        height: 75px;
+        border-radius: 10px;
+    }
+
+    .lesson-number {
+        font-size: 1.4rem;
+    }
+
+    .lesson-text {
+        font-size: 0.7rem;
+    }
+
+    .card,
+    .card1 {
+        padding: 25px 18px;
+        width: 96%;
+        border-radius: 16px;
+        margin: 20px auto;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .learn-box {
+        padding: 18px 14px;
+    }
+
+    .learn-box h2 {
+        font-size: 1.1rem;
+    }
+
+    .learn-box p {
+        font-size: 0.9rem;
+    }
+
+    .compare-table {
+        max-width: 100%;
+    }
+
+    .compare-cell {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+
+    .example-container {
+        grid-template-columns: 1fr;
+    }
+
+    .example-box-top p,
+    .example-box-top-inside p,
+    .example-box-bottom p,
+    .example-box-bottom-inside p,
+    .example-box p {
+        font-size: 0.85rem !important;
+    }
+}
+
+/* ===== RESPONSIVE: Small Phone (≤480px) ===== */
+@media (max-width: 480px) {
+    .content {
+        padding: 60px 10px 20px 10px;
+    }
+
+    .jf-title {
+        font-size: 1.5rem;
+    }
+
+    .jf-label {
+        font-size: 1rem;
+    }
+
+    .lesson-grid {
+        gap: 8px;
+    }
+
+    .lesson-card {
+        width: 56px;
+        height: 66px;
+        border-radius: 8px;
+    }
+
+    .lesson-number {
         font-size: 1.2rem;
+    }
+
+    .lesson-text {
+        font-size: 0.65rem;
+    }
+
+    .card,
+    .card1 {
+        padding: 20px 14px;
+        width: 98%;
+        border-radius: 14px;
+        margin: 15px auto;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    .learn-box {
+        padding: 14px 10px;
+        border-left-width: 5px;
+    }
+
+    .learn-box h2 {
+        font-size: 1rem;
+    }
+
+    .compare-cell {
+        padding: 8px 8px;
+        font-size: 0.78rem;
+    }
+
+    .compare-header .compare-cell {
+        font-size: 0.82rem;
+    }
+
+    .example-box-top p,
+    .example-box-top-inside p,
+    .example-box-bottom p,
+    .example-box-bottom-inside p,
+    .example-box p {
+        font-size: 0.8rem !important;
+        line-height: 160% !important;
     }
 }
