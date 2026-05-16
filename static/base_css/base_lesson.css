@@ -332,8 +332,8 @@ h1 {
     transform: translateY(0) !important;
 }
 
-/* ===== RESPONSIVE: Tablet (≤1024px) ===== */
-@media (max-width: 1024px) {
+/* ===== RESPONSIVE: Tablet (≤1200px) ===== */
+@media (max-width: 1200px) {
     html {
         font-size: 13px; /* Scales down all rem/em units by ~20% */
     }
@@ -386,15 +386,33 @@ h1 {
     }
 }
 
+/* ===== RESPONSIVE: Tablet Landscape Explicit Centering ===== */
+@media (max-width: 1200px) and (orientation: landscape) {
+    .content {
+        margin-left: 0;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .card,
+    .card1 {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        zoom: 0.65;
+    }
+}
+
 /* ===== RESPONSIVE: Mobile (≤768px) ===== */
 @media (max-width: 768px) {
     .content {
         margin-left: 0;
-        padding: 70px 16px 30px 16px;
+        padding: 50px 16px 30px 16px;
     }
 
     .jf-header {
         margin-bottom: 30px;
+        zoom: 0.8;
     }
 
     .jf-title {
@@ -407,10 +425,14 @@ h1 {
 
     .jf-subtitle {
         font-size: 0.9rem;
+        white-space: normal;
+        max-width: 75%;
+        margin: 0 auto;
     }
 
     .lesson-grid {
         gap: 10px;
+        zoom: 0.7;
     }
 
     .lesson-card {
@@ -430,9 +452,10 @@ h1 {
     .card,
     .card1 {
         padding: 25px 18px;
-        width: 96%;
+        width: 75%;
         border-radius: 16px;
-        margin: 20px auto;
+        margin: 50px auto 20px auto;
+        zoom: 0.5;
     }
 
     h1 {
@@ -471,24 +494,43 @@ h1 {
     .example-box p {
         font-size: 0.85rem !important;
     }
+
+    .example-box-top,
+    .example-box-bottom,
+    .example-box,
+    .learn-box {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+    }
 }
 
 /* ===== RESPONSIVE: Small Phone (≤480px) ===== */
 @media (max-width: 480px) {
     .content {
-        padding: 60px 10px 20px 10px;
+        padding: 40px 10px 20px 10px;
     }
 
     .jf-title {
         font-size: 1.5rem;
     }
 
+    .jf-header {
+        zoom: 0.7;
+    }
+
     .jf-label {
         font-size: 1rem;
     }
 
+    .jf-subtitle {
+        max-width: 80%;
+    }
+
     .lesson-grid {
         gap: 8px;
+        zoom: 0.55;
     }
 
     .lesson-card {
@@ -508,9 +550,10 @@ h1 {
     .card,
     .card1 {
         padding: 20px 14px;
-        width: 98%;
+        width: 80%;
         border-radius: 14px;
-        margin: 15px auto;
+        margin: 40px auto 15px auto;
+        zoom: 0.4;
     }
 
     h1 {
@@ -542,5 +585,15 @@ h1 {
     .example-box p {
         font-size: 0.8rem !important;
         line-height: 160% !important;
+    }
+
+    .example-box-top,
+    .example-box-bottom,
+    .example-box,
+    .learn-box {
+        width: 88%;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
     }
 }

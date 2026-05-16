@@ -61,7 +61,7 @@
 
 /* Hero Title */
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     font-weight: 800;
     color: #1a1a2e;
     line-height: 1.15;
@@ -74,6 +74,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    white-space: nowrap;
 }
 
 /* Hero Description */
@@ -309,6 +310,22 @@
     }
 }
 
+/* ===== TABLET LANDSCAPE: Explicit Centering ===== */
+@media (max-width: 1200px) and (orientation: landscape) {
+    .content {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-section {
+        justify-content: center;
+        gap: 80px;
+        margin: 0 auto;
+    }
+}
+
 /* ===== TABLET PORTRAIT: ≤900px ===== */
 @media (max-width: 900px) {
     .hero-section {
@@ -385,7 +402,7 @@
     }
 
     .hero-title {
-        font-size: 2.2rem;
+        font-size: 2rem;
         line-height: 1.2;
     }
 
@@ -408,16 +425,16 @@
     }
 
     .hero-image {
-        max-width: 280px;
+        max-width: 340px;
     }
 
     .hero-image img {
-        max-width: 260px;
+        max-width: 320px;
     }
 
     .image-glow {
-        width: 240px;
-        height: 240px;
+        width: 280px;
+        height: 280px;
     }
 
     .float-badge {
@@ -441,7 +458,7 @@
     }
 
     .hero-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
 
     .hero-description {
@@ -464,16 +481,16 @@
     }
 
     .hero-image {
-        max-width: 220px;
+        max-width: 280px;
     }
 
     .hero-image img {
-        max-width: 200px;
+        max-width: 260px;
     }
 
     .image-glow {
-        width: 190px;
-        height: 190px;
+        width: 240px;
+        height: 240px;
     }
 
     .float-badge {
