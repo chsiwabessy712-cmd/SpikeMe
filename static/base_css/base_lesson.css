@@ -346,7 +346,7 @@ h1 {
     .card1 {
         padding: 30px 25px;
         width: 95%;
-        zoom: 0.6; /* Explicitly scales down the card and all its contents by 40% */
+        zoom: 0.72; /* Explicitly scales down the card and all its contents */
     }
 
     .jf-title {

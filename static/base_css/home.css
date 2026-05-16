@@ -244,7 +244,7 @@
    RESPONSIVE BREAKPOINTS
    ======================================================= */
 
-/* ===== TABLET: ≤1024px (hamburger replaces sidebar) ===== */
+/* ===== TABLET LANDSCAPE: ≤1024px (hamburger replaces sidebar) ===== */
 @media (max-width: 1024px) {
     .content {
         margin-left: 0;
@@ -253,13 +253,70 @@
     }
 
     .hero-section {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+        padding: 40px 40px;
+        gap: 20px;
+        min-height: auto;
+    }
+
+    .hero-text {
+        max-width: 50%;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .hero-title {
+        text-align: left;
+        font-size: 2.8rem;
+    }
+
+    .social-icons {
+        justify-content: flex-start;
+    }
+
+    .hero-description {
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .hero-buttons {
+        justify-content: flex-start;
+    }
+
+    .hero-image {
+        max-width: 45%;
+    }
+
+    .hero-image img {
+        max-width: 380px;
+    }
+
+    .image-glow {
+        width: 320px;
+        height: 320px;
+    }
+
+    .float-badge {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        border-radius: 12px;
+    }
+}
+
+/* ===== TABLET PORTRAIT: ≤900px ===== */
+@media (max-width: 900px) {
+    .hero-section {
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
         padding: 40px 30px;
         gap: 30px;
-        min-height: auto;
     }
 
     .hero-text {
@@ -270,6 +327,7 @@
 
     .hero-title {
         text-align: center;
+        font-size: 2.6rem;
     }
 
     .social-icons {
@@ -277,17 +335,12 @@
     }
 
     .hero-description {
-        max-width: 100%;
         margin-left: auto;
         margin-right: auto;
     }
 
     .hero-buttons {
         justify-content: center;
-    }
-
-    .hero-title {
-        font-size: 2.6rem;
     }
 
     .hero-image {
@@ -301,13 +354,6 @@
     .image-glow {
         width: 300px;
         height: 300px;
-    }
-
-    .float-badge {
-        width: 44px;
-        height: 44px;
-        font-size: 20px;
-        border-radius: 12px;
     }
 }
 
