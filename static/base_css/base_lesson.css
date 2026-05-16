@@ -41,8 +41,9 @@
     font-size: 1rem;
     color: #666;
     margin: 0 auto;
-    max-width: 520px;
+    max-width: 100%;
     line-height: 1.6;
+    white-space: nowrap;
 }
 
 /* ===== LESSON CARDS GRID ===== */
