@@ -333,19 +333,24 @@ h1 {
 
 /* ===== RESPONSIVE: Tablet (≤1024px) ===== */
 @media (max-width: 1024px) {
+    html {
+        font-size: 13px; /* Scales down all rem/em units by ~20% */
+    }
+    
     .content {
         margin-left: 0;
-        padding: 70px 30px 30px 30px;
+        padding: 70px 20px 30px 20px;
     }
 
     .card,
     .card1 {
-        padding: 40px 35px;
+        padding: 30px 25px;
         width: 95%;
+        zoom: 0.6; /* Explicitly scales down the card and all its contents by 40% */
     }
 
     .jf-title {
-        font-size: 2.4rem;
+        font-size: 2.2rem;
     }
 
     .lesson-card {
@@ -362,7 +367,7 @@ h1 {
     }
 
     .example-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .card,
