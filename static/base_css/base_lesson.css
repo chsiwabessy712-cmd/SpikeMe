@@ -345,8 +345,9 @@ h1 {
     .card,
     .card1 {
         padding: 30px 25px;
-        width: 95%;
-        zoom: 0.72; /* Explicitly scales down the card and all its contents */
+        width: 140%; /* Counter-acts the zoom narrowing so it spans the screen */
+        max-width: 1150px; /* Visually becomes ~780px when zoomed, perfectly matching the lesson menu */
+        zoom: 0.68; 
     }
 
     .jf-title {
