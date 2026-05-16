@@ -244,8 +244,8 @@
    RESPONSIVE BREAKPOINTS
    ======================================================= */
 
-/* ===== TABLET LANDSCAPE: ≤1024px (hamburger replaces sidebar) ===== */
-@media (max-width: 1024px) {
+/* ===== TABLET LANDSCAPE: ≤1200px (hamburger replaces sidebar) ===== */
+@media (max-width: 1200px) {
     .content {
         margin-left: 0;
         padding: 70px 0 30px 0;
