@@ -396,10 +396,43 @@ h1 {
     
     .card,
     .card1 {
-        width: 85%;
+        width: 94%;
         margin-left: auto;
         margin-right: auto;
-        zoom: 0.65;
+        zoom: 0.9;
+    }
+
+    .jf-title {
+        font-size: 2.6rem;
+    }
+
+    .jf-label {
+        font-size: 1.6rem;
+    }
+
+    .jf-subtitle {
+        font-size: 1.15rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .learn-box h2 {
+        font-size: 1.5rem;
+    }
+
+    .learn-box p,
+    .compare-cell {
+        font-size: 1.15rem;
+    }
+
+    .example-box-top p,
+    .example-box-top-inside p,
+    .example-box-bottom p,
+    .example-box-bottom-inside p,
+    .example-box p {
+        font-size: 1.15rem !important;
     }
 }
 
@@ -412,54 +445,54 @@ h1 {
 
     .jf-header {
         margin-bottom: 30px;
-        zoom: 0.8;
+        zoom: 0.9;
     }
 
     .jf-title {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
     }
 
     .jf-label {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
     }
 
     .jf-subtitle {
-        font-size: 0.9rem;
+        font-size: 1.1rem;
         white-space: normal;
-        max-width: 75%;
+        max-width: 85%;
         margin: 0 auto;
     }
 
     .lesson-grid {
-        gap: 10px;
-        zoom: 0.7;
+        gap: 4px;
+        zoom: 1;
     }
 
     .lesson-card {
-        width: 65px;
-        height: 75px;
-        border-radius: 10px;
+        width: 42px;
+        height: 48px;
+        border-radius: 6px;
     }
 
     .lesson-number {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
 
     .lesson-text {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
     }
 
     .card,
     .card1 {
         padding: 25px 18px;
-        width: 75%;
+        width: 92%;
         border-radius: 16px;
         margin: 50px auto 20px auto;
-        zoom: 0.5;
+        zoom: 0.85;
     }
 
     h1 {
-        font-size: 1.4rem;
+        font-size: 1.8rem;
     }
 
     .learn-box {
@@ -467,11 +500,11 @@ h1 {
     }
 
     .learn-box h2 {
-        font-size: 1.1rem;
+        font-size: 1.4rem;
     }
 
     .learn-box p {
-        font-size: 0.9rem;
+        font-size: 1.2rem;
     }
 
     .compare-table {
@@ -480,7 +513,7 @@ h1 {
 
     .compare-cell {
         padding: 10px 12px;
-        font-size: 0.85rem;
+        font-size: 1.1rem;
     }
 
     .example-container {
@@ -492,14 +525,14 @@ h1 {
     .example-box-bottom p,
     .example-box-bottom-inside p,
     .example-box p {
-        font-size: 0.85rem !important;
+        font-size: 1.15rem !important;
     }
 
     .example-box-top,
     .example-box-bottom,
     .example-box,
     .learn-box {
-        width: 85%;
+        width: 95%;
         margin-left: auto;
         margin-right: auto;
         box-sizing: border-box;
@@ -513,51 +546,51 @@ h1 {
     }
 
     .jf-title {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
 
     .jf-header {
-        zoom: 0.7;
+        zoom: 0.85;
     }
 
     .jf-label {
-        font-size: 1rem;
+        font-size: 1.15rem;
     }
 
     .jf-subtitle {
-        max-width: 80%;
+        max-width: 90%;
     }
 
     .lesson-grid {
-        gap: 8px;
-        zoom: 0.55;
+        gap: 3px;
+        zoom: 1;
     }
 
     .lesson-card {
-        width: 56px;
-        height: 66px;
-        border-radius: 8px;
+        width: 36px;
+        height: 42px;
+        border-radius: 5px;
     }
 
     .lesson-number {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     .lesson-text {
-        font-size: 0.65rem;
+        font-size: 0.55rem;
     }
 
     .card,
     .card1 {
         padding: 20px 14px;
-        width: 80%;
+        width: 96%;
         border-radius: 14px;
         margin: 40px auto 15px auto;
-        zoom: 0.4;
+        zoom: 0.7;
     }
 
     h1 {
-        font-size: 1.2rem;
+        font-size: 1.6rem;
     }
 
     .learn-box {
@@ -566,16 +599,16 @@ h1 {
     }
 
     .learn-box h2 {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
     .compare-cell {
         padding: 8px 8px;
-        font-size: 0.78rem;
+        font-size: 1.0rem;
     }
 
     .compare-header .compare-cell {
-        font-size: 0.82rem;
+        font-size: 1.1rem;
     }
 
     .example-box-top p,
@@ -583,7 +616,7 @@ h1 {
     .example-box-bottom p,
     .example-box-bottom-inside p,
     .example-box p {
-        font-size: 0.8rem !important;
+        font-size: 1.05rem !important;
         line-height: 160% !important;
     }
 
@@ -591,7 +624,7 @@ h1 {
     .example-box-bottom,
     .example-box,
     .learn-box {
-        width: 88%;
+        width: 96%;
         margin-left: auto;
         margin-right: auto;
         box-sizing: border-box;

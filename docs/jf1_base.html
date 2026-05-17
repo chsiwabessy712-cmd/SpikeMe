@@ -120,13 +120,11 @@
             threshold: 0.15
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('scroll-revealed');
-                } else {
-                    // Remove the class when it goes out of view so it animates again next time
-                    entry.target.classList.remove('scroll-revealed');
+                    observer.unobserve(entry.target); // Stop observing once revealed
                 }
             });
         }, observerOptions);
